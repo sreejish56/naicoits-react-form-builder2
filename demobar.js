@@ -93,7 +93,7 @@ export default class Demobar extends React.Component {
     }
 
     return (
-      <div className="clearfix flex justify-between items-center m-1 p-2 md:!w-9/12">
+      <div className="clearfix flex justify-between items-center m-1 p-2 md:w-9/12">
         <h4 className="font-medium">Preview</h4>
         <div>
           <button

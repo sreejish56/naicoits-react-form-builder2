@@ -291,6 +291,6 @@ Preview.defaultProps = {
   files: [],
   editMode: false,
   editElement: null,
-  className: 'md:!w-9/12 react-form-builder-preview float-left',
+  className: 'md:w-9/12 react-form-builder-preview float-left',
   renderEditForm: props => <FormElementsEdit {...props} />,
 };
