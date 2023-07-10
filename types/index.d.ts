@@ -120,6 +120,7 @@ export type ToolbarItem = {
 
 export interface FormBuilderProps {
   toolbarItems?: ToolbarItem[];
+  data?: any[];
   files?: any[];
   url?: string;
   showCorrectColumn?: boolean;
