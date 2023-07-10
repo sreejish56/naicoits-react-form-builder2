@@ -54,7 +54,7 @@ class ReactFormBuilder extends React.Component {
       toolbarProps.items = this.props.toolbarItems;
     }
     return (
-      <DndProvider backend={HTML5Backend} key={1}>
+      <DndProvider backend={HTML5Backend} key={1} context={window}>
         <IntlProvider
           locale={currentAppLocale.locale}
           messages={currentAppLocale.messages}
