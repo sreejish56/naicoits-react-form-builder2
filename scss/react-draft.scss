@@ -384,9 +384,10 @@
   margin-left: 8px;
 }
 .rdw-link-modal {
+  font-size: 0.75rem !important;
   position: absolute;
   top: 35px;
-  left: 5px;
+  left: -100px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -395,7 +396,7 @@
       -ms-flex-direction: column;
           flex-direction: column;
   width: 235px;
-  height: 180px;
+  height: 205px;
   border: 1px solid #F1F1F1;
   padding: 15px;
   border-radius: 2px;
@@ -404,7 +405,7 @@
   box-shadow: 3px 3px 5px #BFBDBD;
 }
 .rdw-link-modal-label {
-  font-size: 15px;
+  font-size: 0.75rem !important;
 }
 .rdw-link-modal-input {
   margin-top: 5px;
@@ -412,7 +413,8 @@
   border: 1px solid #F1F1F1;
   height: 25px;
   margin-bottom: 15px;
-  padding: 0 5px;
+  padding: 5px;
+  font-size: 0.75rem !important;
 }
 .rdw-link-modal-input:focus {
   outline: none;
@@ -442,6 +444,9 @@
 .rdw-link-modal-btn:disabled {
   background: #ece9e9;
 }
+.rdw-link-modal-target-option span{
+  font-size: 0.75rem;
+} 
 .rdw-link-dropdownoption {
   height: 40px;
   display: -webkit-box;

@@ -38,7 +38,12 @@ export default class FormElementsEdit extends React.Component {
       element: this.props.element,
       data: this.props.data,
       dirty: false,
+      isMounted: false,
     };
+  }
+
+  componentDidMount() {
+    this.setState({ isMounted: true });
   }
 
   toggleRequired() {
@@ -244,7 +249,7 @@ export default class FormElementsEdit extends React.Component {
               <IntlMessages id="text-to-display" />:
             </label>
 
-            <Editor
+            {this.state.isMounted && <Editor
               toolbar={finalToolbar}
               defaultEditorState={editorState}
               onBlur={this.updateElement.bind(this)}
@@ -254,7 +259,7 @@ export default class FormElementsEdit extends React.Component {
                 "content"
               )}
               stripPastedStyles={true}
-            />
+            />}
           </div>
         )}
         {this.props.element.hasOwnProperty("file_path") && (
@@ -296,7 +301,7 @@ export default class FormElementsEdit extends React.Component {
             <label>
               <IntlMessages id="display-label" />
             </label>
-            <Editor
+            {this.state.isMounted && <Editor
               toolbar={toolbar}
               defaultEditorState={editorState}
               onBlur={this.updateElement.bind(this)}
@@ -306,7 +311,7 @@ export default class FormElementsEdit extends React.Component {
                 "label"
               )}
               stripPastedStyles={true}
-            />
+            />}
             <br />
             <div className="custom-control custom-checkbox">
               <input
