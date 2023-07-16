@@ -148,9 +148,9 @@ export default class FormElementsEdit extends React.Component {
   }
 
   render() {
-    if (this.state.dirty) {
-      this.props.element.dirty = true;
-    }
+    // if (this.state.dirty) {
+    //   this.props.element.dirty = true;
+    // }
 
     const this_checked = this.props.element.hasOwnProperty("required")
       ? this.props.element.required
