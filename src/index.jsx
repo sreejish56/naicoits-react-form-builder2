@@ -50,8 +50,24 @@ class ReactFormBuilder extends React.Component {
 
     const language = this.props.locale ? this.props.locale : "en";
     const currentAppLocale = AppLocale[language];
+    let currentData = this.props.data;
     if (this.props.toolbarItems) {
       toolbarProps.items = this.props.toolbarItems;
+      if (typeof currentData === "object") {
+        const imageProps = toolbarProps.items.find(
+          (row) => row.key === "Image"
+        );
+        currentData = currentData.map((row) => {
+          if (
+            row.element === "Image" &&
+            imageProps &&
+            typeof imageProps?.handleImageUpload !== "undefined"
+          ) {
+            row.handleImageUpload = imageProps?.handleImageUpload;
+          }
+          return row;
+        });
+      }
     }
     return (
       <DndProvider backend={HTML5Backend} key={1} context={window}>
@@ -75,7 +91,7 @@ class ReactFormBuilder extends React.Component {
                   manualEditModeOff={this.manualEditModeOff.bind(this)}
                   showCorrectColumn={this.props.showCorrectColumn}
                   parent={this}
-                  data={this.props.data}
+                  data={currentData}
                   url={this.props.url}
                   saveUrl={this.props.saveUrl}
                   onLoad={this.props.onLoad}
