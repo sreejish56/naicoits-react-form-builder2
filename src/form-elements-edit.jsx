@@ -53,7 +53,7 @@ export default class FormElementsEdit extends React.Component {
   editElementProp(elemProperty, targProperty, e) {
     // elemProperty could be content or label
     // targProperty could be value or checked
-    const this_element = this.state.element;
+    const this_element = { ...this.state.element };
     if (elemProperty === "sourceFile") {
       if (e.target.files?.[0]?.name) {
         this_element[elemProperty] = e.target.files[0];
@@ -84,7 +84,7 @@ export default class FormElementsEdit extends React.Component {
       .replace(/<\/p>/g, "")
       .replace(/&nbsp;/g, " ")
       .replace(/(?:\r\n|\r|\n)/g, " ");
-    const this_element = this.state.element;
+    const this_element = { ...this.state.element };
     this_element[property] = html;
 
     this.setState({
@@ -136,7 +136,7 @@ export default class FormElementsEdit extends React.Component {
     this.props.element.handleImageUpload(
       this.state.element?.sourceFile,
       (url) => {
-        const this_element = this.state.element;
+        const this_element = { ...this.state.element };
         this_element.src = url;
         this.setState({
           element: this_element,
