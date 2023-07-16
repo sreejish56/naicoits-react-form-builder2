@@ -1,5 +1,5 @@
 /* eslint-disable max-classes-per-file */
-import * as React from 'react';
+import * as React from "react";
 
 type BaseElement = {
   id: string;
@@ -61,6 +61,7 @@ export type SelectableElement = {
 export type ImageElement = {
   field_name: string;
   src: string;
+  handleImageUpload: (file: File, callback: (url: string) => void) => void;
 };
 export type DateElement = {
   dateFormat: string;
@@ -89,7 +90,8 @@ export type SignatureElement = {
   readOnly: boolean;
 } & FormBuilderInput;
 export type TaskData = BaseElement &
-  (| StaticElement
+  (
+    | StaticElement
     | FormBuilderInput
     | SelectableElement
     | ImageElement

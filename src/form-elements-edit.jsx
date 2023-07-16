@@ -54,7 +54,15 @@ export default class FormElementsEdit extends React.Component {
     // elemProperty could be content or label
     // targProperty could be value or checked
     const this_element = this.state.element;
-    this_element[elemProperty] = e.target[targProperty];
+    if (elemProperty === "sourceFile") {
+      if (e.target.files?.[0]?.name) {
+        this_element[elemProperty] = e.target.files[0];
+      } else {
+        this_element[elemProperty] = null;
+      }
+    } else {
+      this_element[elemProperty] = e.target[targProperty];
+    }
 
     this.setState(
       {
@@ -124,6 +132,21 @@ export default class FormElementsEdit extends React.Component {
     }
   }
 
+  uploadFile() {
+    this.props.element.handleImageUpload(
+      this.state.element?.sourceFile,
+      (url) => {
+        const this_element = this.state.element;
+        this_element.src = url;
+        this.setState({
+          element: this_element,
+          dirty: true,
+        });
+        this.updateElement();
+      }
+    );
+  }
+
   render() {
     if (this.state.dirty) {
       this.props.element.dirty = true;
@@ -187,6 +210,12 @@ export default class FormElementsEdit extends React.Component {
       this.state.element.element === "Image" ||
       this.state.element.element === "Camera";
 
+    const isImage = this.state.element.element === "Image";
+    const showUploadOption =
+      isImage && typeof this.props.element?.handleImageUpload !== "undefined";
+    const sourceType = this.state.element?.sourceType ?? "Link";
+    const sourceFile = this.state.element?.sourceFile?.name ?? "No file chosen";
+
     const isHeader = this.state.element.element === "Header";
     const finalToolbar = {
       ...toolbar,
@@ -249,17 +278,19 @@ export default class FormElementsEdit extends React.Component {
               <IntlMessages id="text-to-display" />:
             </label>
 
-            {this.state.isMounted && <Editor
-              toolbar={finalToolbar}
-              defaultEditorState={editorState}
-              onBlur={this.updateElement.bind(this)}
-              onEditorStateChange={this.onEditorStateChange.bind(
-                this,
-                0,
-                "content"
-              )}
-              stripPastedStyles={true}
-            />}
+            {this.state.isMounted && (
+              <Editor
+                toolbar={finalToolbar}
+                defaultEditorState={editorState}
+                onBlur={this.updateElement.bind(this)}
+                onEditorStateChange={this.onEditorStateChange.bind(
+                  this,
+                  0,
+                  "content"
+                )}
+                stripPastedStyles={true}
+              />
+            )}
           </div>
         )}
         {this.props.element.hasOwnProperty("file_path") && (
@@ -301,17 +332,19 @@ export default class FormElementsEdit extends React.Component {
             <label>
               <IntlMessages id="display-label" />
             </label>
-            {this.state.isMounted && <Editor
-              toolbar={toolbar}
-              defaultEditorState={editorState}
-              onBlur={this.updateElement.bind(this)}
-              onEditorStateChange={this.onEditorStateChange.bind(
-                this,
-                0,
-                "label"
-              )}
-              stripPastedStyles={true}
-            />}
+            {this.state.isMounted && (
+              <Editor
+                toolbar={toolbar}
+                defaultEditorState={editorState}
+                onBlur={this.updateElement.bind(this)}
+                onEditorStateChange={this.onEditorStateChange.bind(
+                  this,
+                  0,
+                  "label"
+                )}
+                stripPastedStyles={true}
+              />
+            )}
             <br />
             <div className="custom-control custom-checkbox">
               <input
@@ -464,7 +497,36 @@ export default class FormElementsEdit extends React.Component {
               )}
           </div>
         )}
-        {this.props.element.hasOwnProperty("src") && (
+        {showUploadOption && (
+          <div>
+            <div className="form-group">
+              <label className="control-label" htmlFor="srcInput">
+                <IntlMessages id="source" />:
+              </label>
+              <select
+                id="sourceType"
+                className="form-control"
+                defaultValue={"Link"}
+                onBlur={this.updateElement.bind(this)}
+                onChange={this.editElementProp.bind(
+                  this,
+                  "sourceType",
+                  "value"
+                )}
+              >
+                {["Link", "Upload"].map((row) => {
+                  return (
+                    <option value={row} key={row}>
+                      {row}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          </div>
+        )}
+
+        {this.props.element.hasOwnProperty("src") && sourceType === "Link" && (
           <div>
             <div className="form-group">
               <label className="control-label" htmlFor="srcInput">
@@ -481,6 +543,53 @@ export default class FormElementsEdit extends React.Component {
             </div>
           </div>
         )}
+
+        {this.props.element.hasOwnProperty("src") &&
+          sourceType === "Upload" && (
+            <div>
+              <div className="form-group">
+                <div className="mt-5">
+                  <div className="mt-4 flex gap-2 text-sm leading-6 text-gray-600">
+                    <label
+                      htmlFor="sourceFile"
+                      className="relative cursor-pointer flex w-full"
+                    >
+                      <div className="relative cursor-pointer button button-secondary whitespace-nowrap">
+                        Choose File
+                        <input
+                          id="sourceFile"
+                          name="sourceFile"
+                          type="file"
+                          className="sr-only"
+                          accept="image/*"
+                          // onBlur={this.updateElement.bind(this)}
+                          onChange={this.editElementProp.bind(
+                            this,
+                            "sourceFile",
+                            "value"
+                          )}
+                        />
+                      </div>
+                      <p className="pl-1 flex items-center border border-l-0 rounded-r-md w-full">
+                        {sourceFile}
+                      </p>
+                    </label>
+                    {sourceFile !== "No file chosen" && (
+                      <div>
+                        <button
+                          className="button button-secondary w-20"
+                          onClick={this.uploadFile.bind(this)}
+                        >
+                          Upload
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
         {canHaveImageSize && (
           <div>
             <div className="form-group">
