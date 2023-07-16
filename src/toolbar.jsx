@@ -461,8 +461,16 @@ class Toolbar extends React.Component {
     elementOptions.canHaveOptionValue = item.canHaveOptionValue !== false;
     elementOptions.canPopulateFromApi = item.canPopulateFromApi !== false;
 
-    if (item.handleImageUpload) {
+    if (item?.headerType) {
+      elementOptions.headerType = item.headerType;
+    }
+
+    if (item?.handleImageUpload) {
       elementOptions.handleImageUpload = item.handleImageUpload;
+    }
+
+    if (item?.sourceType) {
+      elementOptions.sourceType = item.sourceType;
     }
 
     if (item.class_name) {

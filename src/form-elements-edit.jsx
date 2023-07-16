@@ -80,8 +80,9 @@ export default class FormElementsEdit extends React.Component {
   onEditorStateChange(index, property, editorContent) {
     // const html = draftToHtml(convertToRaw(editorContent.getCurrentContent())).replace(/<p>/g, '<div>').replace(/<\/p>/g, '</div>');
     const html = draftToHtml(convertToRaw(editorContent.getCurrentContent()))
-      .replace(/<p>/g, "")
-      .replace(/<\/p>/g, "")
+      .replace(/<p /g, "<div ")
+      .replace(/<p>/g, "<div>")
+      .replace(/<\/p>/g, "</div>")
       .replace(/&nbsp;/g, " ")
       .replace(/(?:\r\n|\r|\n)/g, " ");
     const this_element = { ...this.state.element };
@@ -258,7 +259,7 @@ export default class FormElementsEdit extends React.Component {
             <select
               id="headerType"
               className="form-control"
-              defaultValue={"H3"}
+              defaultValue={this.state.element?.headerType ?? "H3"}
               onBlur={this.updateElement.bind(this)}
               onChange={this.editElementProp.bind(this, "headerType", "value")}
             >
@@ -497,16 +498,17 @@ export default class FormElementsEdit extends React.Component {
               )}
           </div>
         )}
+
         {showUploadOption && (
           <div>
             <div className="form-group">
-              <label className="control-label" htmlFor="srcInput">
+              <label className="control-label" htmlFor="sourceType">
                 <IntlMessages id="source" />:
               </label>
               <select
                 id="sourceType"
                 className="form-control"
-                defaultValue={"Link"}
+                defaultValue={this.state.element?.sourceType ?? "Link"}
                 onBlur={this.updateElement.bind(this)}
                 onChange={this.editElementProp.bind(
                   this,
@@ -577,6 +579,7 @@ export default class FormElementsEdit extends React.Component {
                     {sourceFile !== "No file chosen" && (
                       <div>
                         <button
+                          type="button"
                           className="button button-secondary w-20"
                           onClick={this.uploadFile.bind(this)}
                         >
@@ -936,6 +939,7 @@ export default class FormElementsEdit extends React.Component {
                 </div>
                 <div className="sm:w-6/12 px-3">
                   <button
+                    type="button"
                     onClick={this.addOptions.bind(this)}
                     className="button button-primary"
                   >
