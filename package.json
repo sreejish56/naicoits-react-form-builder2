@@ -1,6 +1,6 @@
 {
   "name": "@naicoits/react-form-builder2",
-  "version": "0.1.2",
+  "version": "0.1.3",
   "description": "A complete form builder for react.",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
@@ -103,6 +103,7 @@
     "build:style": "node-sass ./scss/application.scss dist/app.css --output-style compressed",
     "build:lib": "npm run transpile && npm run build:style",
     "build:dist": "npm run build && npm run copy:dist",
+    "build:local": "npm run build:dist && npm run build:lib",
     "clean": "rimraf dist",
     "copy:dist": "copyfiles -f \"./dist/*\" \"./public/dist\"",
     "prepublishOnly": "npm run clean && NODE_OPTIONS=--openssl-legacy-provider npm run build:lib && NODE_OPTIONS=--openssl-legacy-provider npm run build",

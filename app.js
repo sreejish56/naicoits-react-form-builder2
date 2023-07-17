@@ -97,21 +97,21 @@ const TestComponent = () => <h2>Hello</h2>;
 //   },
 // ];
 
-const items = [
-  {
-    key: "Image",
-    handleImageUpload: (file, callback) => {
-      const fileReader = new FileReader();
-      fileReader.onload = function (fileLoadedEvent) {
-        callback(fileLoadedEvent.target.result);
-      };
-      fileReader.readAsDataURL(file);
-    },
-  },
-  {
-    key: "TwoColumnRow",
-  },
-];
+// const items = [
+//   {
+//     key: "Image",
+//     handleImageUpload: (file, callback) => {
+//       const fileReader = new FileReader();
+//       fileReader.onload = function (fileLoadedEvent) {
+//         callback(fileLoadedEvent.target.result);
+//       };
+//       fileReader.readAsDataURL(file);
+//     },
+//   },
+//   {
+//     key: "TwoColumnRow",
+//   },
+// ];
 
 const App = () => (
   <FormBuilder.ReactFormBuilder
@@ -120,7 +120,7 @@ const App = () => (
     saveUrl={saveUrl}
     locale="en"
     saveAlways={false}
-    toolbarItems={items}
+    //toolbarItems={items}
   />
 );
 

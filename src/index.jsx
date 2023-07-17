@@ -58,14 +58,15 @@ class ReactFormBuilder extends React.Component {
           (row) => row.key === "Image"
         );
         currentData = currentData.map((row) => {
+          const rowItem = {...row};
           if (
-            row.element === "Image" &&
+            rowItem.element === "Image" &&
             imageProps &&
             typeof imageProps?.handleImageUpload !== "undefined"
           ) {
-            row.handleImageUpload = imageProps?.handleImageUpload;
+            rowItem.handleImageUpload = imageProps?.handleImageUpload;
           }
-          return row;
+          return rowItem;
         });
       }
     }
