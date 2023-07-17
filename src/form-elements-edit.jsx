@@ -139,11 +139,15 @@ export default class FormElementsEdit extends React.Component {
       (url) => {
         const this_element = { ...this.state.element };
         this_element.src = url;
-        this.setState({
-          element: this_element,
-          dirty: true,
-        });
-        this.updateElement();
+        this.setState(
+          {
+            element: this_element,
+            dirty: true,
+          },
+          () => {
+            this.updateElement();
+          }
+        );
       }
     );
   }
