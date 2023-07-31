@@ -219,6 +219,8 @@ const items = [{
   key: 'Checkboxes',
 }, {
   key: 'Image',
+},{
+  key: 'Video',
 }];
 ```
 

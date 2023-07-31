@@ -11,6 +11,69 @@ require("./scss/application.scss");
 const url = "/api/formdata";
 const saveUrl = "/api/formdata";
 
+const sampleMediaSource = [
+  {
+    id: "3619233a-97ac-4211-bf11-3b8536d11be5",
+    fileName: "1690280606996-abccc1.jpg",
+    contentType: "image/jpeg",
+    url: "https://pms-uploads.s3.us-east-1.amazonaws.com/pms-dev/uploads/1690280606996-abccc1.jpg",
+  },
+  {
+    id: "62f81f70-c731-4bed-858a-22bebd352f48",
+    fileName: "1690279329910-download1.jpg",
+    contentType: "image/jpeg",
+    url: "https://pms-uploads.s3.us-east-1.amazonaws.com/pms-dev/uploads/1690279329910-download1.jpg",
+  },
+  {
+    id: "f50c2686-da01-4d40-9a4e-0c6860eb64ff",
+    fileName: "1690267807441-download1.jpg",
+    contentType: "image/jpeg",
+    url: "https://pms-uploads.s3.us-east-1.amazonaws.com/pms-dev/uploads/1690267807441-download1.jpg",
+  },
+  {
+    id: "7ecfab1c-bba0-4611-8cc4-3fcbdbde8c15",
+    fileName: "1690188715101-test8.pdf",
+    contentType: "application/pdf",
+    url: "https://pms-uploads.s3.us-east-1.amazonaws.com/pms-dev/uploads/1690188715101-test8.pdf",
+  },
+  {
+    id: "0c082024-018c-4c54-b90e-e39b6f8baafa",
+    fileName: "1690184990785-Free_Test_Data_10MB_WAV.wav",
+    contentType: "audio/wav",
+    url: "https://pms-uploads.s3.us-east-1.amazonaws.com/pms-dev/uploads/1690184990785-Free_Test_Data_10MB_WAV.wav",
+  },
+  {
+    id: "4907833f-da71-4f97-9bc3-800ca8f0d570",
+    fileName: "1690184443508-sample-mp4-file.mp4",
+    contentType: "video/mp4",
+    url: "https://pms-uploads.s3.us-east-1.amazonaws.com/pms-dev/uploads/1690184443508-sample-mp4-file.mp4",
+  },
+  {
+    id: "7d8f04bf-308a-4c63-a80b-36e376ad9386",
+    fileName: "1690182157076-download1.jpg",
+    contentType: "image/jpeg",
+    url: "https://pms-uploads.s3.us-east-1.amazonaws.com/pms-dev/uploads/1690182157076-download1.jpg",
+  },
+  {
+    id: "8a02dd05-964d-4fd3-aecb-6c3c6b6a513f",
+    fileName: "1690182143437-abccc1.jpg",
+    contentType: "image/jpeg",
+    url: "https://pms-uploads.s3.us-east-1.amazonaws.com/pms-dev/uploads/1690182143437-abccc1.jpg",
+  },
+  {
+    id: "8b9d15ef-9bff-4232-83ea-f90f39c03245",
+    fileName: "1690181905491-abccc1.jpg",
+    contentType: "image/jpeg",
+    url: "https://pms-uploads.s3.us-east-1.amazonaws.com/pms-dev/uploads/1690181905491-abccc1.jpg",
+  },
+  {
+    id: "e724ddbd-ebc3-4eca-9cef-6cc538fd5893",
+    fileName: "1689943627674-file_example_WAV_2MG.wav",
+    contentType: "audio/wav",
+    url: "https://pms-uploads.s3.us-east-1.amazonaws.com/pms-dev/uploads/1689943627674-file_example_WAV_2MG.wav",
+  },
+];
+
 const TestComponent = () => <h2>Hello</h2>;
 
 // const MyInput = React.forwardRef((props, ref) => {
@@ -38,6 +101,8 @@ const TestComponent = () => <h2>Hello</h2>;
 //     key: 'Checkboxes',
 //   }, {
 //     key: 'Image',
+//   }, {
+//     key: 'Video',
 //   },
 //   {
 //     key: 'FieldSet',
@@ -97,21 +162,37 @@ const TestComponent = () => <h2>Hello</h2>;
 //   },
 // ];
 
-// const items = [
-//   {
-//     key: "Image",
-//     handleImageUpload: (file, callback) => {
-//       const fileReader = new FileReader();
-//       fileReader.onload = function (fileLoadedEvent) {
-//         callback(fileLoadedEvent.target.result);
-//       };
-//       fileReader.readAsDataURL(file);
-//     },
-//   },
-//   {
-//     key: "TwoColumnRow",
-//   },
-// ];
+const items = [
+  {
+    key: "Image",
+    handleUpload: (file, callback) => {
+      const fileReader = new FileReader();
+      fileReader.onload = function (fileLoadedEvent) {
+        callback(fileLoadedEvent.target.result);
+      };
+      fileReader.readAsDataURL(file);
+    },
+    handleMediaChoose: (file, callback) => {
+      callback(file?.url, file?.id, file?.cover);
+    },
+  },
+  {
+    key: "Video",
+    handleUpload: (file, callback) => {
+      const fileReader = new FileReader();
+      fileReader.onload = function (fileLoadedEvent) {
+        callback(fileLoadedEvent.target.result);
+      };
+      fileReader.readAsDataURL(file);
+    },
+    handleMediaChoose: (file, callback) => {
+      callback(file?.url, file?.id, file?.cover);
+    },
+  },
+  {
+    key: "TwoColumnRow",
+  },
+];
 
 const App = () => (
   <FormBuilder.ReactFormBuilder
@@ -120,7 +201,13 @@ const App = () => (
     saveUrl={saveUrl}
     locale="en"
     saveAlways={false}
-    //toolbarItems={items}
+    toolbarItems={items}
+    imageMediaSource={sampleMediaSource.filter((row) =>
+      row.contentType.includes("image")
+    )}
+    videoMediaSource={sampleMediaSource.filter(
+      (row) => !row.contentType.includes("image")
+    )}
   />
 );
 

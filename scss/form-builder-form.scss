@@ -24,9 +24,15 @@ input[type="date"] {
 .react-form-builder-form {
   position: relative;
 
-  .rfb-item.alwaysbreak { page-break-before: always; }
-  .rfb-item.nobreak:before { clear:both; }
-  .rfb-item.nobreak { page-break-inside: avoid; }
+  .rfb-item.alwaysbreak {
+    page-break-before: always;
+  }
+  .rfb-item.nobreak:before {
+    clear: both;
+  }
+  .rfb-item.nobreak {
+    page-break-inside: avoid;
+  }
 
   .rfb-item {
     padding: 10px 12px;
@@ -59,7 +65,7 @@ input[type="date"] {
       a {
         cursor: pointer;
       }
-      input[type='date'] {
+      input[type="date"] {
         height: 42px;
       }
       .m-signature-pad {
@@ -69,7 +75,8 @@ input[type="date"] {
       .react-star-rating {
         display: block;
       }
-      .checkbox-label, .radio-label {
+      .checkbox-label,
+      .radio-label {
         font-weight: normal;
         display: block;
       }
@@ -77,7 +84,7 @@ input[type="date"] {
         margin-left: 5px;
       }
     }
-    
+
     .no-image {
       background: #eee;
       width: 100px;
@@ -85,6 +92,17 @@ input[type="date"] {
       border: 1px solid #ddd;
       text-align: center;
       padding-top: 35px;
+    }
+
+    .no-video-image {
+      background: #eee;
+      width: 120px;
+      height: 120px;
+      border: 1px solid #ddd;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

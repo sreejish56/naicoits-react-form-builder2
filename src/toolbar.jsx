@@ -315,6 +315,15 @@ class Toolbar extends React.Component {
         src: "",
       },
       {
+        key: "Video",
+        name: intl.formatMessage({ id: "video-audio" }),
+        label: "",
+        icon: "far fa-play-circle",
+        field_name: "video_",
+        src: "",
+        srcCover: "",
+      },
+      {
         key: "Rating",
         canHaveAnswer: true,
         name: intl.formatMessage({ id: "rating" }),
@@ -465,12 +474,20 @@ class Toolbar extends React.Component {
       elementOptions.headerType = item.headerType;
     }
 
-    if (item?.handleImageUpload) {
-      elementOptions.handleImageUpload = item.handleImageUpload;
+    if (item?.handleUpload) {
+      elementOptions.handleUpload = item.handleUpload;
     }
 
     if (item?.sourceType) {
       elementOptions.sourceType = item.sourceType;
+    }
+    
+    if (item?.handleMediaChoose) {
+      elementOptions.handleMediaChoose = item.handleMediaChoose;
+    }
+
+    if (item?.assetId) {
+      elementOptions.assetId = item.assetId;
     }
 
     if (item.class_name) {
@@ -479,6 +496,11 @@ class Toolbar extends React.Component {
 
     if (elementKey === "Image") {
       elementOptions.src = item.src;
+    }
+
+    if (elementKey === "Video") {
+      elementOptions.src = item.src;
+      elementOptions.srcCover = item.srcCover;
     }
 
     if (elementKey === "DatePicker") {

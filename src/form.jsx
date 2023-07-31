@@ -13,7 +13,7 @@ import { FieldSet } from "./fieldset";
 import CustomElement from "./form-elements/custom-element";
 import Registry from "./stores/registry";
 
-const { Image, Checkboxes, Signature, Download, Camera, FileUpload } =
+const { Image, Video, Checkboxes, Signature, Download, Camera, FileUpload } =
   FormElements;
 
 class ReactForm extends React.Component {
@@ -481,6 +481,17 @@ class ReactForm extends React.Component {
           case "Image":
             return (
               <Image
+                ref={(c) => (this.inputs[item.field_name] = c)}
+                handleChange={this.handleChange}
+                mutable={true}
+                key={`form_${item.id}`}
+                data={item}
+                defaultValue={this._getDefaultValue(item)}
+              />
+            );
+          case "Video":
+            return (
+              <Video
                 ref={(c) => (this.inputs[item.field_name] = c)}
                 handleChange={this.handleChange}
                 mutable={true}

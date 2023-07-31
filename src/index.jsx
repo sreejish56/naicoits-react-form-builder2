@@ -55,16 +55,17 @@ class ReactFormBuilder extends React.Component {
       toolbarProps.items = this.props.toolbarItems;
       if (typeof currentData === "object") {
         const imageProps = toolbarProps.items.find(
-          (row) => row.key === "Image"
+          (row) => row.key === "Image" || row.key === "Video"
         );
         currentData = currentData.map((row) => {
-          const rowItem = {...row};
+          const rowItem = { ...row };
           if (
-            rowItem.element === "Image" &&
+            (rowItem.element === "Image" ||
+              rowItem.element === "Video") &&
             imageProps &&
-            typeof imageProps?.handleImageUpload !== "undefined"
+            typeof imageProps?.handleUpload !== "undefined"
           ) {
-            rowItem.handleImageUpload = imageProps?.handleImageUpload;
+            rowItem.handleUpload = imageProps?.handleUpload;
           }
           return rowItem;
         });
@@ -104,6 +105,8 @@ class ReactFormBuilder extends React.Component {
                   editElement={this.state.editElement}
                   renderEditForm={this.props.renderEditForm}
                   saveAlways={this.props.saveAlways}
+                  imageMediaSource={this.props?.imageMediaSource ?? []}
+                  videoMediaSource={this.props?.videoMediaSource ?? []}
                 />
                 <Toolbar
                   {...toolbarProps}

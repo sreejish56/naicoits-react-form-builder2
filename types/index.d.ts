@@ -19,6 +19,7 @@ type BaseElement = {
     | "Three Column Row"
     | "Multi Column Row"
     | "Image"
+    | "Video"
     | "Rating"
     | "Date"
     | "Signature"
@@ -61,7 +62,13 @@ export type SelectableElement = {
 export type ImageElement = {
   field_name: string;
   src: string;
-  handleImageUpload: (file: File, callback: (url: string) => void) => void;
+  handleUpload: (file: File, callback: (url: string) => void) => void;
+};
+export type VideoElement = {
+  field_name: string;
+  src: string;
+  srcCover: string;
+  handleUpload: (file: File, callback: (url: string) => void) => void;
 };
 export type DateElement = {
   dateFormat: string;
@@ -95,6 +102,7 @@ export type TaskData = BaseElement &
     | FormBuilderInput
     | SelectableElement
     | ImageElement
+    | VideoElement
     | DateElement
     | RangeElement
     | WebsiteElement

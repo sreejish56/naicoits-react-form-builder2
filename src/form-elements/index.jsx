@@ -696,6 +696,31 @@ class Image extends React.Component {
   }
 }
 
+class Video extends React.Component {
+  render() {
+    const style = this.props.data.center ? { textAlign: "center" } : null;
+
+    let baseClasses = "SortableItem rfb-item";
+    if (this.props.data.pageBreakBefore) {
+      baseClasses += " alwaysbreak";
+    }
+
+    return (
+      <div style={{ ...this.props.style, ...style }} className={baseClasses}>
+        <ComponentHeader {...this.props} />
+        {this.props.data?.srcCover && (
+          <img
+            src={this.props.data?.srcCover}
+            width={this.props.data.width}
+            height={this.props.data.height}
+          />
+        )}
+        {!this.props.data?.srcCover && <div className="no-video-image">No Cover Image</div>}
+      </div>
+    );
+  }
+}
+
 class Rating extends React.Component {
   constructor(props) {
     super(props);
@@ -1135,6 +1160,7 @@ FormElements.Checkboxes = Checkboxes;
 FormElements.DatePicker = DatePicker;
 FormElements.RadioButtons = RadioButtons;
 FormElements.Image = Image;
+FormElements.Video = Video;
 FormElements.Rating = Rating;
 FormElements.Tags = Tags;
 FormElements.HyperLink = HyperLink;
