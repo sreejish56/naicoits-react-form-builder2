@@ -141,6 +141,8 @@ export interface FormBuilderProps {
   saveAlways?: boolean;
   editMode?: boolean;
   renderEditForm?: (props: BaseElement) => React.ReactNode;
+  imageMediaSource?: any[];
+  videoMediaSource?: any[];
 }
 
 export class ReactFormBuilder extends React.Component<FormBuilderProps> {}
