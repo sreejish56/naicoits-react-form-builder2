@@ -67,6 +67,14 @@ class ReactFormBuilder extends React.Component {
           ) {
             rowItem.handleUpload = imageProps?.handleUpload;
           }
+          if (
+            (rowItem.element === "Image" ||
+              rowItem.element === "Video") &&
+            imageProps &&
+            typeof imageProps?.handleMediaChoose !== "undefined"
+          ) {
+            rowItem.handleMediaChoose = imageProps?.handleMediaChoose;
+          }
           return rowItem;
         });
       }

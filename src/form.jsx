@@ -545,6 +545,7 @@ class ReactForm extends React.Component {
         <div className="react-form-builder-form">
           <form
             encType="multipart/form-data"
+            id={"nextFormBuilder"}
             ref={(c) => (this.form = c)}
             action={this.props.form_action}
             onSubmit={this.handleSubmit.bind(this)}
