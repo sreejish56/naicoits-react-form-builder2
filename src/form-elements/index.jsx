@@ -708,14 +708,24 @@ class Video extends React.Component {
     return (
       <div style={{ ...this.props.style, ...style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
-        {this.props.data?.srcCover && (
-          <img
-            src={this.props.data?.srcCover}
-            width={this.props.data.width}
-            height={this.props.data.height}
-          />
-        )}
-        {!this.props.data?.srcCover && <div className="no-video-image">No Cover Image</div>}
+        <div
+          onClick={() => {
+            if (typeof this.props.data?.handleView !== "undefined") {
+              this.props.data?.handleView(this.props.data);
+            }
+          }}
+        >
+          {this.props.data?.srcCover && (
+            <img
+              src={this.props.data?.srcCover}
+              width={this.props.data.width}
+              height={this.props.data.height}
+            />
+          )}
+          {!this.props.data?.srcCover && (
+            <div className="no-video-image">No Cover Image</div>
+          )}
+        </div>
       </div>
     );
   }
