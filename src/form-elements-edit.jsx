@@ -1057,44 +1057,6 @@ export default class FormElementsEdit extends React.Component {
             </div>
           </div>
         )}
-        {this.props.element.hasOwnProperty("static") &&
-          this.props.element.static && (
-            <div className="form-group">
-              <label className="control-label">
-                <IntlMessages id="text-style" />
-              </label>
-              <div className="custom-control custom-checkbox">
-                <input
-                  id="do-bold"
-                  className="custom-control-input"
-                  type="checkbox"
-                  checked={this_checked_bold}
-                  value={true}
-                  onChange={this.editElementProp.bind(this, "bold", "checked")}
-                />
-                <label className="custom-control-label" htmlFor="do-bold">
-                  <IntlMessages id="bold" />
-                </label>
-              </div>
-              <div className="custom-control custom-checkbox">
-                <input
-                  id="do-italic"
-                  className="custom-control-input"
-                  type="checkbox"
-                  checked={this_checked_italic}
-                  value={true}
-                  onChange={this.editElementProp.bind(
-                    this,
-                    "italic",
-                    "checked"
-                  )}
-                />
-                <label className="custom-control-label" htmlFor="do-italic">
-                  <IntlMessages id="italic" />
-                </label>
-              </div>
-            </div>
-          )}
         {this.props.element.showDescription && (
           <div className="form-group">
             <label className="control-label" htmlFor="questionDescription">
