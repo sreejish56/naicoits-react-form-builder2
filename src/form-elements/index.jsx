@@ -12,6 +12,8 @@ import ComponentHeader from "./component-header";
 import ComponentLabel from "./component-label";
 import myxss from "./myxss";
 
+import noCoverImage from "./noCoverImage.webp";
+
 const FormElements = {};
 
 function renderHeader(headerType, classNames, content) {
@@ -705,6 +707,11 @@ class Video extends React.Component {
       baseClasses += " alwaysbreak";
     }
 
+    const srcCover =
+      this.props.data?.srcCover && this.props.data?.srcCover != ""
+        ? this.props.data?.srcCover
+        : noCoverImage;
+
     return (
       <div style={{ ...this.props.style, ...style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
@@ -715,15 +722,38 @@ class Video extends React.Component {
             }
           }}
         >
-          {this.props.data?.srcCover && (
-            <img
-              src={this.props.data?.srcCover}
-              width={this.props.data.width}
-              height={this.props.data.height}
-            />
-          )}
-          {!this.props.data?.srcCover && (
-            <div className="no-video-image">No Cover Image</div>
+          {srcCover && (
+            <div
+              className={`${
+                this.props?.data?.width
+                  ? "w-[" + this.props?.data?.width + "px]"
+                  : "w-full"
+              } ${
+                this.props?.data?.height
+                  ? "h-[" + this.props?.data?.height + "px]"
+                  : "h-[380px]"
+              } border form-cover-image-video-tile rounded-md`}
+              style={{
+                backgroundImage:
+                  'linear-gradient(rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.55)), url("' +
+                  srcCover +
+                  '")',
+              }}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="60"
+                height="60"
+                viewBox="0 0 41 41"
+                fill="none"
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"
+              >
+                <path
+                  fill="#fff"
+                  d="M20.194 0C9.042 0 0 9.04 0 20.191c0 11.152 9.042 20.192 20.194 20.192 11.15 0 20.196-9.04 20.196-20.192C40.39 9.041 31.347 0 20.194 0Zm-7.572 30.286V10.094l17.671 10.097-17.67 10.095Z"
+                ></path>
+              </svg>
+            </div>
           )}
         </div>
       </div>
