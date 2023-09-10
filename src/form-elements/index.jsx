@@ -712,6 +712,9 @@ class Video extends React.Component {
         ? this.props.data?.srcCover
         : noCoverImage;
 
+    const width = this.props?.data?.width ?? "100%";
+    const height = this.props?.data?.height ?? "380px";
+
     return (
       <div style={{ ...this.props.style, ...style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
@@ -724,20 +727,14 @@ class Video extends React.Component {
         >
           {srcCover && (
             <div
-              className={`${
-                this.props?.data?.width
-                  ? "w-[" + this.props?.data?.width + "px]"
-                  : "w-full"
-              } ${
-                this.props?.data?.height
-                  ? "h-[" + this.props?.data?.height + "px]"
-                  : "h-[380px]"
-              } border form-cover-image-video-tile rounded-md`}
+              className={`form-cover-image-video-tile`}
               style={{
                 backgroundImage:
                   'linear-gradient(rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.55)), url("' +
                   srcCover +
                   '")',
+                width,
+                height,
               }}
             >
               <svg
