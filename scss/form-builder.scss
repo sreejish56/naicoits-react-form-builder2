@@ -761,3 +761,9 @@
   border: 2px solid var(--theme-primary-color);
   border-radius: 0.5rem;
 }
+
+.form-cover-image-video-tile {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}

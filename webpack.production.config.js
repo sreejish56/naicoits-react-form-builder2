@@ -67,6 +67,10 @@ module.exports = {
           }
         ]
       },
+      {
+        test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg|webp)(\?[a-z0-9=.]+)?$/,
+        loader: "url-loader",
+      }
     ]
   },
   performance: {
