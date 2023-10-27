@@ -162,37 +162,37 @@ const TestComponent = () => <h2>Hello</h2>;
 //   },
 // ];
 
-// const items = [
-//   {
-//     key: "Image",
-//     handleUpload: (file, callback) => {
-//       const fileReader = new FileReader();
-//       fileReader.onload = function (fileLoadedEvent) {
-//         callback(fileLoadedEvent.target.result);
-//       };
-//       fileReader.readAsDataURL(file);
-//     },
-//     handleMediaChoose: (file, callback) => {
-//       callback(file?.url, file?.id, file?.cover);
-//     },
-//   },
-//   {
-//     key: "Video",
-//     handleUpload: (file, callback) => {
-//       const fileReader = new FileReader();
-//       fileReader.onload = function (fileLoadedEvent) {
-//         callback(fileLoadedEvent.target.result);
-//       };
-//       fileReader.readAsDataURL(file);
-//     },
-//     handleMediaChoose: (file, callback) => {
-//       callback(file?.url, file?.id, file?.cover);
-//     },
-//   },
-//   {
-//     key: "TwoColumnRow",
-//   },
-// ];
+/* const items = [
+  {
+    key: "Image",
+    handleUpload: (file, callback) => {
+      const fileReader = new FileReader();
+      fileReader.onload = function (fileLoadedEvent) {
+        callback(fileLoadedEvent.target.result);
+      };
+      fileReader.readAsDataURL(file);
+    },
+    handleMediaChoose: (file, callback) => {
+      callback(file?.url, file?.id, file?.cover);
+    },
+  },
+  {
+    key: "Video",
+    handleUpload: (file, callback) => {
+      const fileReader = new FileReader();
+      fileReader.onload = function (fileLoadedEvent) {
+        callback(fileLoadedEvent.target.result);
+      };
+      fileReader.readAsDataURL(file);
+    },
+    handleMediaChoose: (file, callback) => {
+      callback(file?.url, file?.id, file?.cover);
+    },
+  },
+  {
+    key: "TwoColumnRow",
+  },
+]; */
 
 const App = () => (
   <FormBuilder.ReactFormBuilder

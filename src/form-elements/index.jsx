@@ -710,6 +710,8 @@ class Video extends React.Component {
     const srcCover =
       this.props.data?.srcCover && this.props.data?.srcCover != ""
         ? this.props.data?.srcCover
+        : typeof noCoverImage === "object"
+        ? noCoverImage?.src
         : noCoverImage;
 
     const width = this.props?.data?.width ?? "100%";
