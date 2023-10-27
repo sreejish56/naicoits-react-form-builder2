@@ -701,7 +701,6 @@ class Image extends React.Component {
 class Video extends React.Component {
   render() {
     const style = this.props.data.center ? { textAlign: "center" } : null;
-
     let baseClasses = "SortableItem rfb-item";
     if (this.props.data.pageBreakBefore) {
       baseClasses += " alwaysbreak";
@@ -710,6 +709,8 @@ class Video extends React.Component {
     const srcCover =
       this.props.data?.srcCover && this.props.data?.srcCover != ""
         ? this.props.data?.srcCover
+        : typeof noCoverImage === "object"
+        ? noCoverImage?.src
         : noCoverImage;
 
     const width = this.props?.data?.width ?? "100%";
