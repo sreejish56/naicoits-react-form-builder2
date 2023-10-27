@@ -701,7 +701,6 @@ class Image extends React.Component {
 class Video extends React.Component {
   render() {
     const style = this.props.data.center ? { textAlign: "center" } : null;
-
     let baseClasses = "SortableItem rfb-item";
     if (this.props.data.pageBreakBefore) {
       baseClasses += " alwaysbreak";
