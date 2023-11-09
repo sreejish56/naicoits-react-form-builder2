@@ -192,6 +192,21 @@ const TestComponent = () => <h2>Hello</h2>;
   {
     key: "TwoColumnRow",
   },
+  {
+    key: "TextInput",
+  },
+  {
+    key: "TextArea",
+  },
+  {
+    key: "RadioButtons",
+  },
+  {
+    key: "Checkboxes",
+  },
+  {
+    key: "DatePicker",
+  },
 ]; */
 
 const App = () => (

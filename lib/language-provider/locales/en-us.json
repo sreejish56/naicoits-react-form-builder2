@@ -53,6 +53,7 @@
   "place-holder-tag-3" : "Place holder option 3",
 
   "toolbox" : "Components",
+  "toolbox-description" : "Click on any components to add it to the form and use ({dragHandle}) drag and drop feature to move them to any place you want.",
   "header-text" : "Header Text",
   "label" : "Label",
   "paragraph" : "Paragraph",

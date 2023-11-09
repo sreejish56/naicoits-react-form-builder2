@@ -577,6 +577,7 @@ class Toolbar extends React.Component {
     return (
       <div className="md:w-3/12 react-form-builder-toolbar float-right">
         <h4>{this.props.intl.formatMessage({ id: "toolbox" })}</h4>
+        <p className="px-2 toolbox-description">{this.props.intl.formatMessage({ id: "toolbox-description" },{dragHandle: <i class="is-isolated fas fa-grip-vertical"></i> })}</p>
         <ul>
           {items.map(this.renderItem)}
           {groupKeys.map((k) => (
