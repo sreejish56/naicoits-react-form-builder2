@@ -734,6 +734,7 @@ class Video extends React.Component {
             <div
               className={`form-cover-image-video-tile`}
               style={{
+                maxWidth: "100%",
                 backgroundImage:
                   'linear-gradient(rgba(0, 0, 0, 0) 40%, rgba(0, 0, 0, 0.55)), url("' +
                   srcCover +
