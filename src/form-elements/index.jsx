@@ -713,8 +713,12 @@ class Video extends React.Component {
         ? noCoverImage?.src
         : noCoverImage;
 
-    const width = this.props?.data?.width ?? "100%";
-    const height = this.props?.data?.height ?? "380px";
+    const width = this.props?.data?.width
+      ? this.props?.data?.width + "px"
+      : "100%";
+    const height = this.props?.data?.height
+      ? this.props?.data?.height + "px"
+      : "380px";
 
     return (
       <div style={{ ...this.props.style, ...style }} className={baseClasses}>

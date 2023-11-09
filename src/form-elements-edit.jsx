@@ -150,7 +150,7 @@ export default class FormElementsEdit extends React.Component {
   }
 
   MediaBrowserTile(file) {
-    const contentType = file.contentType.split("/").shift();
+    const contentType = file?.contentType?.split("/").shift();
     switch (contentType) {
       case "image":
         return (
@@ -309,51 +309,51 @@ export default class FormElementsEdit extends React.Component {
     //   this.props.element.dirty = true;
     // }
 
-    const this_checked = this.props.element.hasOwnProperty("required")
-      ? this.props.element.required
+    const this_checked = this.state.element.hasOwnProperty("required")
+      ? this.state.element.required
       : false;
-    const this_read_only = this.props.element.hasOwnProperty("readOnly")
-      ? this.props.element.readOnly
+    const this_read_only = this.state.element.hasOwnProperty("readOnly")
+      ? this.state.element.readOnly
       : false;
-    const this_default_today = this.props.element.hasOwnProperty("defaultToday")
-      ? this.props.element.defaultToday
+    const this_default_today = this.state.element.hasOwnProperty("defaultToday")
+      ? this.state.element.defaultToday
       : false;
-    const this_show_time_select = this.props.element.hasOwnProperty(
+    const this_show_time_select = this.state.element.hasOwnProperty(
       "showTimeSelect"
     )
-      ? this.props.element.showTimeSelect
+      ? this.state.element.showTimeSelect
       : false;
-    const this_show_time_select_only = this.props.element.hasOwnProperty(
+    const this_show_time_select_only = this.state.element.hasOwnProperty(
       "showTimeSelectOnly"
     )
-      ? this.props.element.showTimeSelectOnly
+      ? this.state.element.showTimeSelectOnly
       : false;
-    const this_show_time_input = this.props.element.hasOwnProperty(
+    const this_show_time_input = this.state.element.hasOwnProperty(
       "showTimeInput"
     )
-      ? this.props.element.showTimeInput
+      ? this.state.element.showTimeInput
       : false;
-    const this_checked_inline = this.props.element.hasOwnProperty("inline")
-      ? this.props.element.inline
+    const this_checked_inline = this.state.element.hasOwnProperty("inline")
+      ? this.state.element.inline
       : false;
-    const this_checked_bold = this.props.element.hasOwnProperty("bold")
-      ? this.props.element.bold
+    const this_checked_bold = this.state.element.hasOwnProperty("bold")
+      ? this.state.element.bold
       : false;
-    const this_checked_italic = this.props.element.hasOwnProperty("italic")
-      ? this.props.element.italic
+    const this_checked_italic = this.state.element.hasOwnProperty("italic")
+      ? this.state.element.italic
       : false;
-    const this_checked_center = this.props.element.hasOwnProperty("center")
-      ? this.props.element.center
+    const this_checked_center = this.state.element.hasOwnProperty("center")
+      ? this.state.element.center
       : false;
-    const this_checked_page_break = this.props.element.hasOwnProperty(
+    const this_checked_page_break = this.state.element.hasOwnProperty(
       "pageBreakBefore"
     )
-      ? this.props.element.pageBreakBefore
+      ? this.state.element.pageBreakBefore
       : false;
-    const this_checked_alternate_form = this.props.element.hasOwnProperty(
+    const this_checked_alternate_form = this.state.element.hasOwnProperty(
       "alternateForm"
     )
-      ? this.props.element.alternateForm
+      ? this.state.element.alternateForm
       : false;
 
     const {

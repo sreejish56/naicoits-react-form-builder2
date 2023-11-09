@@ -162,7 +162,7 @@ const TestComponent = () => <h2>Hello</h2>;
 //   },
 // ];
 
-/* const items = [
+const items = [
   {
     key: "Image",
     handleUpload: (file, callback) => {
@@ -192,7 +192,22 @@ const TestComponent = () => <h2>Hello</h2>;
   {
     key: "TwoColumnRow",
   },
-]; */
+  {
+    key: "TextInput",
+  },
+  {
+    key: "TextArea",
+  },
+  {
+    key: "RadioButtons",
+  },
+  {
+    key: "Checkboxes",
+  },
+  {
+    key: "DatePicker",
+  },
+];
 
 const App = () => (
   <FormBuilder.ReactFormBuilder
@@ -201,7 +216,7 @@ const App = () => (
     saveUrl={saveUrl}
     locale="en"
     saveAlways={false}
-    //toolbarItems={items}
+    toolbarItems={items}
     imageMediaSource={sampleMediaSource.filter((row) =>
       row.contentType.includes("image")
     )}
