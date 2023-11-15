@@ -391,13 +391,13 @@ class Toolbar extends React.Component {
         label: intl.formatMessage({ id: "place-holder-label" }),
         field_name: "camera_",
       },
-      {
-        key: "FileUpload",
-        name: intl.formatMessage({ id: "file-upload" }),
-        icon: "fas fa-file",
-        label: intl.formatMessage({ id: "place-holder-label" }),
-        field_name: "file_upload_",
-      },
+      // {
+      //   key: "FileUpload",
+      //   name: intl.formatMessage({ id: "file-upload" }),
+      //   icon: "fas fa-file",
+      //   label: intl.formatMessage({ id: "place-holder-label" }),
+      //   field_name: "file_upload_",
+      // },
     ];
   }
 
