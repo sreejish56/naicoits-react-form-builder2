@@ -219,7 +219,7 @@ class EmailInput extends React.Component {
 
   render() {
     const props = {};
-    props.type = "text";
+    props.type = "email";
     props.className = "form-control";
     props.name = this.props.data.field_name;
     if (this.props.mutable) {
@@ -354,6 +354,57 @@ class TextArea extends React.Component {
         <div className="form-group">
           <ComponentLabel {...this.props} />
           <textarea {...props} />
+        </div>
+      </div>
+    );
+  }
+}
+
+class ColorPicker extends React.Component {
+  constructor(props) {
+    super(props);
+    this.inputField = React.createRef();
+  }
+
+  render() {
+    const props = {};
+    props.type = "color";
+    props.className = "form-control custom-color-picker";
+    props.name = this.props.data.field_name;
+    if (this.props.mutable) {
+      props.defaultValue = this.props.defaultValue;
+      props.ref = this.inputField;
+    }
+
+    let baseClasses = "SortableItem rfb-item";
+    if (this.props.data.pageBreakBefore) {
+      baseClasses += " alwaysbreak";
+    }
+
+    if (this.props.read_only) {
+      props.disabled = "disabled";
+    }
+
+    return (
+      <div style={{ ...this.props.style }} className={baseClasses}>
+        <ComponentHeader {...this.props} />
+        <div
+          className={`form-group flex ${
+            this.props.data.canDisplayInline ? "items-center gap-2" : "flex-col"
+          }`}
+        >
+          <div
+            className={this.props.data.isLabelDisplaySecond ? "order-2" : ""}
+          >
+            <ComponentLabel {...this.props} />
+          </div>
+          <div
+            className={`custom-color-picker-wrapper ${
+              this.props.data.isLabelDisplaySecond ? "order-1" : ""
+            }`}
+          >
+            <input {...props} />
+          </div>
         </div>
       </div>
     );
@@ -1197,6 +1248,7 @@ FormElements.EmailInput = EmailInput;
 FormElements.PhoneNumber = PhoneNumber;
 FormElements.NumberInput = NumberInput;
 FormElements.TextArea = TextArea;
+FormElements.ColorPicker = ColorPicker;
 FormElements.Dropdown = Dropdown;
 FormElements.Signature = Signature;
 FormElements.Checkboxes = Checkboxes;

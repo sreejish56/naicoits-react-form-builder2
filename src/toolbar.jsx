@@ -250,6 +250,17 @@ class Toolbar extends React.Component {
         field_name: "text_area_",
       },
       {
+        key: "ColorPicker",
+        canHaveAnswer: true,
+        canReadOnly: true,
+        canDisplayInline: true,
+        isLabelDisplaySecond: true,
+        name: intl.formatMessage({ id: "color-picker" }),
+        label: intl.formatMessage({ id: "place-holder-label" }),
+        icon: "fas fa-palette",
+        field_name: "color_picker_",
+      },
+      {
         key: "FieldSet",
         canHaveAnswer: false,
         name: intl.formatMessage({ id: "fieldset" }),
@@ -440,6 +451,12 @@ class Toolbar extends React.Component {
 
     if (item.canReadOnly) {
       elementOptions.readOnly = false;
+    }
+    if (item.canDisplayInline) {
+      elementOptions.canDisplayInline = false;
+    }
+    if (item.isLabelDisplaySecond) {
+      elementOptions.isLabelDisplaySecond = false;
     }
 
     if (item.canDefaultToday) {

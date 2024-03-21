@@ -8,6 +8,7 @@ import store from "./stores/store";
 import FormElementsEdit from "./form-dynamic-edit";
 import SortableFormElements from "./sortable-form-elements";
 import CustomDragLayer from "./form-elements/component-drag-layer";
+import ID from "./UUID";
 
 const { PlaceHolder } = SortableFormElements;
 
@@ -36,6 +37,7 @@ export default class Preview extends React.Component {
     this.insertCard = this.insertCard.bind(this);
     this.setAsChild = this.setAsChild.bind(this);
     this.removeChild = this.removeChild.bind(this);
+    this._onClone = this._onClone.bind(this);
     this._onDestroy = this._onDestroy.bind(this);
   }
 
@@ -117,6 +119,51 @@ export default class Preview extends React.Component {
       });
     }
     store.dispatch("delete", item);
+  }
+
+  _onClone(item) {
+    const { data } = this.state;
+    let hoverIndex = data.findIndex((row) => row.id === item.id) + 1;
+    const newItem = { ...item };
+    newItem.id = ID.uuid();
+    if (typeof newItem.field_name !== "undefined") {
+      newItem.field_name =
+        newItem.field_name.replace(/[A-Z0-9\-]+/g, "") + ID.uuid();
+    }
+    if (typeof newItem.options !== "undefined") {
+      newItem.options = newItem.options.map((row) => {
+        const option = { ...row };
+        option.key = option.key.replace(/[A-Z0-9\-]+/g, "") + ID.uuid();
+        return option;
+      });
+    }
+    if (typeof newItem.childItems !== "undefined") {
+      newItem.childItems = newItem.childItems.map((row, index) => {
+        const child = this.getDataById(row);
+        if (child) {
+          const newChild = { ...child };
+          newChild.id = ID.uuid();
+          newChild.parentId = newItem.id;
+          newChild.parentIndex = hoverIndex;
+          if (typeof newChild.field_name !== "undefined") {
+            newChild.field_name =
+              newChild.field_name.replace(/[A-Z0-9\-]+/g, "") + ID.uuid();
+          }
+          if (typeof newChild.options !== "undefined") {
+            newChild.options = newChild.options.map((row) => {
+              const option = { ...row };
+              option.key = option.key.replace(/[A-Z0-9\-]+/g, "") + ID.uuid();
+              return option;
+            });
+          }
+          this.insertCard(newChild, data.length + index);
+          return newChild.id;
+        }
+        return null;
+      });
+    }
+
+    this.insertCard(newItem, hoverIndex);
   }
 
   getDataById(id) {
@@ -282,6 +329,7 @@ export default class Preview extends React.Component {
         setAsChild={this.setAsChild}
         removeChild={this.removeChild}
         _onDestroy={this._onDestroy}
+        _onClone={this._onClone}
       />
     );
   }

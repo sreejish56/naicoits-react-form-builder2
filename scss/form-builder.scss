@@ -156,6 +156,20 @@
       display: block !important;
     }
 
+    .custom-color-picker-wrapper {
+      overflow: hidden;
+      width: 2.25rem;
+      height: 2.25rem;
+      border-radius: 7px;
+
+      .custom-color-picker {
+        padding: 0;
+        width: 150%;
+        height: 150%;
+        margin: -25%;
+      }
+    }
+
     .edit-form {
       position: fixed;
       background: #fafafa;
