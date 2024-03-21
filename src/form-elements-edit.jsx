@@ -3,10 +3,11 @@ import TextAreaAutosize from "react-textarea-autosize";
 import {
   ContentState,
   EditorState,
-  convertFromHTML,
+  // convertFromHTML,
   convertToRaw,
 } from "draft-js";
 import draftToHtml from "draftjs-to-html";
+import htmlToDraft from "html-to-draftjs";
 import { Editor } from "react-draft-wysiwyg";
 
 import DynamicOptionList from "./dynamic-option-list";
@@ -104,7 +105,7 @@ export default class FormElementsEdit extends React.Component {
   }
 
   convertFromHTML(content) {
-    const newContent = convertFromHTML(content);
+    const newContent = htmlToDraft(content);
     if (!newContent.contentBlocks || !newContent.contentBlocks.length) {
       // to prevent crash when no contents in editor
       return EditorState.createEmpty();
@@ -314,6 +315,16 @@ export default class FormElementsEdit extends React.Component {
       : false;
     const this_read_only = this.state.element.hasOwnProperty("readOnly")
       ? this.state.element.readOnly
+      : false;
+    const this_canDisplayInline = this.state.element.hasOwnProperty(
+      "canDisplayInline"
+    )
+      ? this.state.element.canDisplayInline
+      : false;
+    const this_isLabelDisplaySecond = this.state.element.hasOwnProperty(
+      "isLabelDisplaySecond"
+    )
+      ? this.state.element.isLabelDisplaySecond
       : false;
     const this_default_today = this.state.element.hasOwnProperty("defaultToday")
       ? this.state.element.defaultToday
@@ -558,6 +569,50 @@ export default class FormElementsEdit extends React.Component {
                 />
                 <label className="custom-control-label" htmlFor="is-read-only">
                   <IntlMessages id="read-only" />
+                </label>
+              </div>
+            )}
+            {this.props.element.hasOwnProperty("canDisplayInline") && (
+              <div className="custom-control custom-checkbox">
+                <input
+                  id="is-canDisplayInline"
+                  className="custom-control-input"
+                  type="checkbox"
+                  checked={this_canDisplayInline}
+                  value={true}
+                  onChange={this.editElementProp.bind(
+                    this,
+                    "canDisplayInline",
+                    "checked"
+                  )}
+                />
+                <label
+                  className="custom-control-label"
+                  htmlFor="is-canDisplayInline"
+                >
+                  <IntlMessages id="canDisplayInline" />
+                </label>
+              </div>
+            )}
+            {this.props.element.hasOwnProperty("isLabelDisplaySecond") && (
+              <div className="custom-control custom-checkbox">
+                <input
+                  id="is-isLabelDisplaySecond"
+                  className="custom-control-input"
+                  type="checkbox"
+                  checked={this_isLabelDisplaySecond}
+                  value={true}
+                  onChange={this.editElementProp.bind(
+                    this,
+                    "isLabelDisplaySecond",
+                    "checked"
+                  )}
+                />
+                <label
+                  className="custom-control-label"
+                  htmlFor="is-isLabelDisplaySecond"
+                >
+                  <IntlMessages id="isLabelDisplaySecond" />
                 </label>
               </div>
             )}

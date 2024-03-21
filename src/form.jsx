@@ -438,6 +438,7 @@ class ReactForm extends React.Component {
           case "PhoneNumber":
           case "NumberInput":
           case "TextArea":
+          case "ColorPicker":
           case "Dropdown":
           case "DatePicker":
           case "RadioButtons":

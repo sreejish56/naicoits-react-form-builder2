@@ -15,6 +15,7 @@ type BaseElement = {
     | "Text Input"
     | "Number Input"
     | "Multi-line Input"
+    | "Color Picker"
     | "Two Column Row"
     | "Three Column Row"
     | "Multi Column Row"
@@ -47,6 +48,8 @@ export type StaticElement = {
 };
 export type FormBuilderInput = {
   canHaveAnswer?: true;
+  canDisplayInline?: true;
+  isLabelDisplaySecond?: true;
   field_name: string;
   label: string;
 };
