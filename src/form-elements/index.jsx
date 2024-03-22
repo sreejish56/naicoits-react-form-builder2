@@ -371,9 +371,11 @@ class ColorPicker extends React.Component {
     props.type = "color";
     props.className = "form-control custom-color-picker";
     props.name = this.props.data.field_name;
-    props.value = this.props.data.defaultValue;
     if (this.props.mutable) {
+      props.defaultValue = this.props.data.defaultValue;
       props.ref = this.inputField;
+    } else {
+      props.value = this.props.data.defaultValue;
     }
 
     let baseClasses = "SortableItem rfb-item";
@@ -394,13 +396,15 @@ class ColorPicker extends React.Component {
           }`}
         >
           <div
-            className={this.props.data.isLabelDisplaySecond ? "order-2" : ""}
+            className={
+              this.props.data.isLabelDisplaySecond ? "form-builder-order-2" : ""
+            }
           >
             <ComponentLabel {...this.props} />
           </div>
           <div
             className={`custom-color-picker-wrapper ${
-              this.props.data.isLabelDisplaySecond ? "order-1" : ""
+              this.props.data.isLabelDisplaySecond ? "form-builder-order-1" : ""
             }`}
           >
             <input {...props} />
