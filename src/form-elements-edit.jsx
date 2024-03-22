@@ -71,7 +71,10 @@ export default class FormElementsEdit extends React.Component {
         dirty: true,
       },
       () => {
-        if (targProperty === "checked") {
+        if (
+          targProperty === "checked" ||
+          (targProperty === "value" && this_element.element === "ColorPicker")
+        ) {
           this.updateElement();
         }
       }
@@ -326,6 +329,12 @@ export default class FormElementsEdit extends React.Component {
     )
       ? this.state.element.isLabelDisplaySecond
       : false;
+
+    const this_colorPickerDefaultValue =
+      this.state.element.hasOwnProperty("defaultValue") &&
+      this.state.element.element === "ColorPicker"
+        ? this.state.element.defaultValue
+        : "#2f94aa";
     const this_default_today = this.state.element.hasOwnProperty("defaultToday")
       ? this.state.element.defaultToday
       : false;
@@ -535,6 +544,31 @@ export default class FormElementsEdit extends React.Component {
                 stripPastedStyles={true}
               />
             )}
+            <br />
+            {this.props.element.hasOwnProperty("defaultValue") &&
+              this.props.element.element === "ColorPicker" && (
+                <div>
+                  <label
+                    className="control-label"
+                    htmlFor="is-this_colorPickerDefaultValue"
+                  >
+                    <IntlMessages id="colorPickerDefaultValue" />
+                  </label>
+                  <div className="default-color-picker-wrapper">
+                    <input
+                      id="is-this_colorPickerDefaultValue"
+                      type="color"
+                      className="default-color-picker-value"
+                      value={this_colorPickerDefaultValue}
+                      onChange={this.editElementProp.bind(
+                        this,
+                        "defaultValue",
+                        "value"
+                      )}
+                    />
+                  </div>
+                </div>
+              )}
             <br />
             <div className="custom-control custom-checkbox">
               <input
