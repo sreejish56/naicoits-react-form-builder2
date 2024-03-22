@@ -12,6 +12,7 @@
   "height": "Height",
   "required": "Required",
   "read-only": "Read only",
+  "colorPickerDefaultValue": "Default Color",
   "canDisplayInline": "Display Inline",
   "isLabelDisplaySecond": "Display Label Second",
   "default-to-today": "Default to Today",

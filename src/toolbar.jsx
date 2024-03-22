@@ -255,6 +255,7 @@ class Toolbar extends React.Component {
         canReadOnly: true,
         canDisplayInline: true,
         isLabelDisplaySecond: true,
+        defaultValue: '#2f94aa',
         name: intl.formatMessage({ id: "color-picker" }),
         label: intl.formatMessage({ id: "place-holder-label" }),
         icon: "fas fa-palette",

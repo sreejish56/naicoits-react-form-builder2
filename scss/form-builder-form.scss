@@ -89,7 +89,7 @@ input[type="date"] {
         width: 2.25rem;
         height: 2.25rem;
         border-radius: 7px;
-        
+
         .custom-color-picker {
           padding: 0;
           width: 150%;
@@ -117,6 +117,22 @@ input[type="date"] {
       display: flex;
       align-items: center;
       justify-content: center;
+    }
+  }
+}
+
+.react-form-builder-preview.is-editing .edit-form {
+  .default-color-picker-wrapper {
+    overflow: hidden;
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 7px;
+
+    .default-color-picker-value {
+      padding: 0;
+      width: 150%;
+      height: 150%;
+      margin: -25%;
     }
   }
 }

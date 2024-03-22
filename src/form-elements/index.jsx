@@ -371,8 +371,8 @@ class ColorPicker extends React.Component {
     props.type = "color";
     props.className = "form-control custom-color-picker";
     props.name = this.props.data.field_name;
+    props.value = this.props.data.defaultValue;
     if (this.props.mutable) {
-      props.defaultValue = this.props.defaultValue;
       props.ref = this.inputField;
     }
 
@@ -382,7 +382,7 @@ class ColorPicker extends React.Component {
     }
 
     if (this.props.read_only) {
-      props.disabled = "disabled";
+      props.readOnly = true;
     }
 
     return (
