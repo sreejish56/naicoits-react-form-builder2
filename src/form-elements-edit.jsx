@@ -32,6 +32,21 @@ const toolbar = {
   },
 };
 
+const columnSizeOptions = [
+  { value: "md:w-1/12 px-3", label: "1/12" },
+  { value: "md:w-2/12 px-3", label: "2/12" },
+  { value: "md:w-3/12 px-3", label: "3/12" },
+  { value: "md:w-4/12 px-3", label: "4/12" },
+  { value: "md:w-5/12 px-3", label: "5/12" },
+  { value: "md:w-6/12 px-3", label: "6/12" },
+  { value: "md:w-7/12 px-3", label: "7/12" },
+  { value: "md:w-8/12 px-3", label: "8/12" },
+  { value: "md:w-9/12 px-3", label: "9/12" },
+  { value: "md:w-10/12 px-3", label: "10/12" },
+  { value: "md:w-11/12 px-3", label: "11/12" },
+  { value: "md:w-full px-3", label: "12/12" },
+];
+
 export default class FormElementsEdit extends React.Component {
   constructor(props) {
     super(props);
@@ -105,6 +120,24 @@ export default class FormElementsEdit extends React.Component {
       this.props.updateElement.call(this.props.preview, this_element);
       this.setState({ dirty: false });
     }
+  }
+
+  editChildItemsClass(index, e) {
+    const this_element = this.state.element;
+    this_element.childItemsClass[index] = e.target.value;
+    this.setState(
+      {
+        element: this_element,
+        dirty: true,
+      },
+      () => {
+        this.updateElement();
+      }
+    );
+    // to prevent ajax calls with no change
+    this.props.updateElement.call(this.props.preview, this_element);
+    this.setState({ dirty: false });
+    this.updateElement();
   }
 
   convertFromHTML(content) {
@@ -1003,6 +1036,34 @@ export default class FormElementsEdit extends React.Component {
           </div>
         ) : (
           <div />
+        )}
+
+        {this.props.element.hasOwnProperty("childItemsClass") && (
+          <div>
+            {this.state.element.childItemsClass.map((childItem, index) => {
+              return (
+                <div key={index} className="form-group">
+                  <label className="control-label" htmlFor="childItemsClass">
+                    <IntlMessages id="child" /> {index + 1}:
+                  </label>
+                  <select
+                    id="childItemsClass"
+                    className="form-control"
+                    defaultValue={childItem}
+                    onChange={this.editChildItemsClass.bind(this, index)}
+                  >
+                    {columnSizeOptions?.map((row) => {
+                      return (
+                        <option value={row.value} key={row.value}>
+                          {row.label}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </div>
+              );
+            })}
+          </div>
         )}
 
         {canHavePageBreakBefore && (
