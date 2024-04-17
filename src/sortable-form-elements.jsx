@@ -1,13 +1,36 @@
-import SortableElement from './sortable-element';
-import PlaceHolder from './form-place-holder';
-import BaseFormElements from './form-elements';
-import { TwoColumnRow, ThreeColumnRow, MultiColumnRow } from './multi-column';
-import { FieldSet } from './fieldset';
-import CustomElement from './form-elements/custom-element';
+import SortableElement from "./sortable-element";
+import PlaceHolder from "./form-place-holder";
+import BaseFormElements from "./form-elements";
+import { TwoColumnRow, ThreeColumnRow, MultiColumnRow } from "./multi-column";
+import { FieldSet } from "./fieldset";
+import CustomElement from "./form-elements/custom-element";
 
 const {
-  Header, Paragraph, Label, LineBreak, TextInput, EmailInput, PhoneNumber, NumberInput, TextArea, ColorPicker, Dropdown, Checkboxes,
-  DatePicker, RadioButtons, Image, Video, Rating, Tags, Signature, HyperLink, Download, Camera, Range, FileUpload,
+  Header,
+  Paragraph,
+  Label,
+  LineBreak,
+  TextInput,
+  EmailInput,
+  PhoneNumber,
+  NumberInput,
+  TextArea,
+  ColorPicker,
+  Dropdown,
+  Checkboxes,
+  DatePicker,
+  RadioButtons,
+  LikertScale,
+  Image,
+  Video,
+  Rating,
+  Tags,
+  Signature,
+  HyperLink,
+  Download,
+  Camera,
+  Range,
+  FileUpload,
 } = BaseFormElements;
 
 const FormElements = {};
@@ -27,6 +50,7 @@ FormElements.Signature = SortableElement(Signature);
 FormElements.Checkboxes = SortableElement(Checkboxes);
 FormElements.DatePicker = SortableElement(DatePicker);
 FormElements.RadioButtons = SortableElement(RadioButtons);
+FormElements.LikertScale = SortableElement(LikertScale);
 FormElements.Image = SortableElement(Image);
 FormElements.Video = SortableElement(Video);
 FormElements.Rating = SortableElement(Rating);

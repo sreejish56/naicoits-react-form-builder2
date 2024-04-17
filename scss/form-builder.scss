@@ -224,6 +224,10 @@
       }
       .dynamic-option-list {
         margin-bottom: 15px;
+        input[type=text]:read-only {
+          background: #ececec;
+          text-align: center;
+        }
         ul {
           list-style-type: none;
           margin: 0;
