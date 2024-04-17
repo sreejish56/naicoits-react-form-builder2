@@ -773,6 +773,7 @@ export default class FormElementsEdit extends React.Component {
               </div>
             )}
             {(this.state.element.element === "RadioButtons" ||
+              this.state.element.element === "LikertScale" ||
               this.state.element.element === "Checkboxes") &&
               canHaveDisplayHorizontal && (
                 <div className="custom-control custom-checkbox">
@@ -1315,6 +1316,7 @@ export default class FormElementsEdit extends React.Component {
             preview={this.props.preview}
             element={this.props.element}
             key={this.props.element.options.length}
+            canEditOptionValues={this.state.element.element !== "LikertScale"}
           />
         )}
       </div>

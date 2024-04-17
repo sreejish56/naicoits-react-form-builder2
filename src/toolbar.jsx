@@ -139,6 +139,34 @@ class Toolbar extends React.Component {
             key: `radiobuttons_option_${ID.uuid()}`,
           },
         ];
+      case "LikertScale":
+        return [
+          {
+            value: "1",
+            text: intl.formatMessage({ id: "strongly-disagree" }),
+            key: `likertscale_option_${ID.uuid()}`,
+          },
+          {
+            value: "2",
+            text: intl.formatMessage({ id: "disagree" }),
+            key: `likertscale_option_${ID.uuid()}`,
+          },
+          {
+            value: "3",
+            text: intl.formatMessage({ id: "neither-agree-or-disagree" }),
+            key: `likertscale_option_${ID.uuid()}`,
+          },
+          {
+            value: "4",
+            text: intl.formatMessage({ id: "agree" }),
+            key: `likertscale_option_${ID.uuid()}`,
+          },
+          {
+            value: "5",
+            text: intl.formatMessage({ id: "strongly-agree" }),
+            key: `likertscale_option_${ID.uuid()}`,
+          },
+        ];
       default:
         return [];
     }
@@ -210,6 +238,16 @@ class Toolbar extends React.Component {
         options: [],
       },
       {
+        key: "LikertScale",
+        canHaveAnswer: true,
+        canHaveOptionCorrect: false,
+        name: intl.formatMessage({ id: "likert-scale" }),
+        icon: "fas fa-bezier-curve",
+        label: intl.formatMessage({ id: "place-holder-label" }),
+        field_name: "likertscale_",
+        options: [],
+      },
+      {
         key: "TextInput",
         canHaveAnswer: true,
         name: intl.formatMessage({ id: "text-input" }),
@@ -255,7 +293,7 @@ class Toolbar extends React.Component {
         canReadOnly: true,
         canDisplayInline: true,
         isLabelDisplaySecond: true,
-        defaultValue: '#2f94aa',
+        defaultValue: "#2f94aa",
         name: intl.formatMessage({ id: "color-picker" }),
         label: intl.formatMessage({ id: "place-holder-label" }),
         icon: "fas fa-palette",
@@ -499,7 +537,7 @@ class Toolbar extends React.Component {
     if (item?.sourceType) {
       elementOptions.sourceType = item.sourceType;
     }
-    
+
     if (item?.handleMediaChoose) {
       elementOptions.handleMediaChoose = item.handleMediaChoose;
     }
@@ -595,7 +633,12 @@ class Toolbar extends React.Component {
     return (
       <div className="md:w-3/12 react-form-builder-toolbar float-right">
         <h4>{this.props.intl.formatMessage({ id: "toolbox" })}</h4>
-        <p className="px-2 toolbox-description">{this.props.intl.formatMessage({ id: "toolbox-description" },{dragHandle: <i className="is-isolated fas fa-grip-vertical"></i> })}</p>
+        <p className="px-2 toolbox-description">
+          {this.props.intl.formatMessage(
+            { id: "toolbox-description" },
+            { dragHandle: <i className="is-isolated fas fa-grip-vertical"></i> }
+          )}
+        </p>
         <ul>
           {items.map(this.renderItem)}
           {groupKeys.map((k) => (

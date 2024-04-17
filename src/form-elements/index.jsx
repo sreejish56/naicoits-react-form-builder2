@@ -728,6 +728,73 @@ class RadioButtons extends React.Component {
   }
 }
 
+class LikertScale extends React.Component {
+  constructor(props) {
+    super(props);
+    this.options = {};
+  }
+
+  render() {
+    const self = this;
+    let classNames = "custom-control custom-radio";
+    if (this.props.data.inline) {
+      classNames += " option-inline";
+    }
+
+    let baseClasses = "SortableItem rfb-item";
+    if (this.props.data.pageBreakBefore) {
+      baseClasses += " alwaysbreak";
+    }
+
+    return (
+      <div style={{ ...this.props.style }} className={baseClasses}>
+        <ComponentHeader {...this.props} />
+        <div className="form-group">
+          <ComponentLabel {...this.props} />
+          {this.props.data.options.map((option) => {
+            const this_key = `preview_${option.key}`;
+            const props = {};
+            props.name = self.props.data.field_name;
+
+            props.type = "radio";
+            props.value = option.value;
+            if (self.props.mutable) {
+              props.defaultChecked =
+                self.props.defaultValue !== undefined &&
+                (self.props.defaultValue.indexOf(option.key) > -1 ||
+                  self.props.defaultValue.indexOf(option.value) > -1);
+            }
+            if (this.props.read_only) {
+              props.disabled = "disabled";
+            }
+
+            return (
+              <div className={classNames} key={this_key}>
+                <input
+                  id={`fid_${this_key}`}
+                  className="custom-control-input"
+                  ref={(c) => {
+                    if (c && self.props.mutable) {
+                      self.options[`child_ref_${option.key}`] = c;
+                    }
+                  }}
+                  {...props}
+                />
+                <label
+                  className="custom-control-label"
+                  htmlFor={`fid_${this_key}`}
+                >
+                  {option.text}
+                </label>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
+}
+
 class Image extends React.Component {
   render() {
     const style = this.props.data.center ? { textAlign: "center" } : null;
@@ -1258,6 +1325,7 @@ FormElements.Signature = Signature;
 FormElements.Checkboxes = Checkboxes;
 FormElements.DatePicker = DatePicker;
 FormElements.RadioButtons = RadioButtons;
+FormElements.LikertScale = LikertScale;
 FormElements.Image = Image;
 FormElements.Video = Video;
 FormElements.Rating = Rating;

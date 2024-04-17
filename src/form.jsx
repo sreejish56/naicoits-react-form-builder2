@@ -92,7 +92,11 @@ class ReactForm extends React.Component {
     let incorrect = false;
     if (item.canHaveAnswer) {
       const ref = this.inputs[item.field_name];
-      if (item.element === "Checkboxes" || item.element === "RadioButtons") {
+      if (
+        item.element === "Checkboxes" ||
+        item.element === "RadioButtons" ||
+        item.element === "LikertScale"
+      ) {
         item.options.forEach((option) => {
           const $option = ReactDOM.findDOMNode(
             ref.options[`child_ref_${option.key}`]
@@ -124,7 +128,11 @@ class ReactForm extends React.Component {
     let invalid = false;
     if (item.required === true) {
       const ref = this.inputs[item.field_name];
-      if (item.element === "Checkboxes" || item.element === "RadioButtons") {
+      if (
+        item.element === "Checkboxes" ||
+        item.element === "RadioButtons" ||
+        item.element === "LikertScale"
+      ) {
         let checked_options = 0;
         item.options.forEach((option) => {
           const $option = ReactDOM.findDOMNode(
@@ -159,7 +167,11 @@ class ReactForm extends React.Component {
     };
     if (!itemData.name) return null;
     const ref = this.inputs[item.field_name];
-    if (item.element === "Checkboxes" || item.element === "RadioButtons") {
+    if (
+      item.element === "Checkboxes" ||
+      item.element === "RadioButtons" ||
+      item.element === "LikertScale"
+    ) {
       const checked_options = [];
       item.options.forEach((option) => {
         const $option = ReactDOM.findDOMNode(
@@ -442,6 +454,7 @@ class ReactForm extends React.Component {
           case "Dropdown":
           case "DatePicker":
           case "RadioButtons":
+          case "LikertScale":
           case "Rating":
           case "Tags":
           case "Range":
