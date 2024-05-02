@@ -514,7 +514,11 @@ class Signature extends React.Component {
         <div className="form-group">
           <ComponentLabel {...this.props} />
           {this.props.read_only === true || !!sourceDataURL ? (
-            <img src={sourceDataURL} />
+            !!sourceDataURL ? (
+              <img src={sourceDataURL} />
+            ) : (
+              <div />
+            )
           ) : (
             <div className="m-sign-body">
               <SignaturePad {...pad_props} />
