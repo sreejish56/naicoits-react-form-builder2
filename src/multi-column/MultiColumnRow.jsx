@@ -36,7 +36,10 @@ class MultiColumnRowBase extends React.Component {
             {childItems.map((x, i) => {
               const wrapperClass = childItemsClass?.[i] ?? className;
               return (
-                <div key={`${i}_${x || "_"}`} className={wrapperClass}>
+                <div
+                  key={`${i}_${JSON.stringify(x) || "_"}`}
+                  className={wrapperClass}
+                >
                   {controls ? (
                     controls[i]
                   ) : (
@@ -48,7 +51,9 @@ class MultiColumnRowBase extends React.Component {
                       col={i}
                       parentIndex={index}
                       editModeOn={editModeOn}
-                      _onDestroy={() => removeChild(data, i)}
+                      _onDestroy={(item) => {
+                        removeChild(data, i, item.id);
+                      }}
                       getDataById={getDataById}
                       setAsChild={setAsChild}
                       seq={seq}

@@ -340,9 +340,17 @@ class ReactForm extends React.Component {
   }
 
   getContainerElement(item, Element) {
-    const controls = item.childItems.map((x) =>
-      x ? this.getInputElement(this.getDataById(x)) : <div>&nbsp;</div>
-    );
+    const controls = item.childItems.map((x) => {
+      if (x) {
+        if (Array.isArray(x)) {
+          return x.map((y) => this.getInputElement(this.getDataById(y)));
+        } else {
+          return this.getInputElement(this.getDataById(x));
+        }
+      } else {
+        return <div>&nbsp;</div>;
+      }
+    });
     return (
       <Element
         mutable={true}

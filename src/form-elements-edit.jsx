@@ -1085,7 +1085,8 @@ export default class FormElementsEdit extends React.Component {
               return (
                 <div key={index} className="form-group">
                   <label className="control-label" htmlFor="childItemsClass">
-                    <IntlMessages id="child" /> {index + 1}:
+                    <IntlMessages id="child" /> {index + 1}{" "}
+                    <IntlMessages id="width" />:
                   </label>
                   <select
                     id="childItemsClass"

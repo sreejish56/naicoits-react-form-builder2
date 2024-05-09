@@ -143,3 +143,9 @@ input[type="date"] {
 .form-builder-order-2 {
   order: 2;
 }
+
+.show-dot-border .SortableItem.rfb-item{
+  border: 1px dashed gray;
+  margin: 0.25rem;
+  width: calc(100% - 0.5rem) !important;
+}

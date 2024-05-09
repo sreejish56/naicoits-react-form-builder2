@@ -204,6 +204,8 @@ class Toolbar extends React.Component {
       {
         key: "Dropdown",
         canHaveAnswer: true,
+        canDisplayInline: true,
+        isLabelDisplaySecond: true,
         name: intl.formatMessage({ id: "dropdown" }),
         icon: "far fa-caret-square-down",
         label: intl.formatMessage({ id: "place-holder-label" }),
@@ -250,6 +252,8 @@ class Toolbar extends React.Component {
       {
         key: "TextInput",
         canHaveAnswer: true,
+        canDisplayInline: true,
+        isLabelDisplaySecond: true,
         name: intl.formatMessage({ id: "text-input" }),
         label: intl.formatMessage({ id: "place-holder-label" }),
         icon: "fas fa-font",
@@ -258,6 +262,8 @@ class Toolbar extends React.Component {
       {
         key: "EmailInput",
         canHaveAnswer: true,
+        canDisplayInline: true,
+        isLabelDisplaySecond: true,
         name: intl.formatMessage({ id: "email-input" }),
         label: intl.formatMessage({ id: "place-holder-email" }),
         icon: "fas fa-envelope",
@@ -266,6 +272,8 @@ class Toolbar extends React.Component {
       {
         key: "NumberInput",
         canHaveAnswer: true,
+        canDisplayInline: true,
+        isLabelDisplaySecond: true,
         name: intl.formatMessage({ id: "number-input" }),
         label: intl.formatMessage({ id: "place-holder-label" }),
         icon: "fas fa-plus",
@@ -274,6 +282,8 @@ class Toolbar extends React.Component {
       {
         key: "PhoneNumber",
         canHaveAnswer: true,
+        canDisplayInline: true,
+        isLabelDisplaySecond: true,
         name: intl.formatMessage({ id: "phone-input" }),
         label: intl.formatMessage({ id: "place-holder-phone-number" }),
         icon: "fas fa-phone",

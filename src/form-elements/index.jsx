@@ -202,9 +202,25 @@ class TextInput extends React.Component {
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
-        <div className="form-group">
-          <ComponentLabel {...this.props} />
-          <input {...props} />
+        <div
+          className={`form-group flex ${
+            this.props.data.canDisplayInline ? "items-center gap-2" : "flex-col"
+          }`}
+        >
+          <div
+            className={
+              this.props.data.isLabelDisplaySecond ? "form-builder-order-2" : ""
+            }
+          >
+            <ComponentLabel {...this.props} />
+          </div>
+          <div
+            className={`w-full ${
+              this.props.data.isLabelDisplaySecond ? "form-builder-order-1" : ""
+            }`}
+          >
+            <input {...props} />
+          </div>
         </div>
       </div>
     );
@@ -239,9 +255,25 @@ class EmailInput extends React.Component {
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
-        <div className="form-group">
-          <ComponentLabel {...this.props} />
-          <input {...props} />
+        <div
+          className={`form-group flex ${
+            this.props.data.canDisplayInline ? "items-center gap-2" : "flex-col"
+          }`}
+        >
+          <div
+            className={
+              this.props.data.isLabelDisplaySecond ? "form-builder-order-2" : ""
+            }
+          >
+            <ComponentLabel {...this.props} />
+          </div>
+          <div
+            className={`w-full ${
+              this.props.data.isLabelDisplaySecond ? "form-builder-order-1" : ""
+            }`}
+          >
+            <input {...props} />
+          </div>
         </div>
       </div>
     );
@@ -276,9 +308,25 @@ class PhoneNumber extends React.Component {
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
-        <div className="form-group">
-          <ComponentLabel {...this.props} />
-          <input {...props} />
+        <div
+          className={`form-group flex ${
+            this.props.data.canDisplayInline ? "items-center gap-2" : "flex-col"
+          }`}
+        >
+          <div
+            className={
+              this.props.data.isLabelDisplaySecond ? "form-builder-order-2" : ""
+            }
+          >
+            <ComponentLabel {...this.props} />
+          </div>
+          <div
+            className={`w-full ${
+              this.props.data.isLabelDisplaySecond ? "form-builder-order-1" : ""
+            }`}
+          >
+            <input {...props} />
+          </div>
         </div>
       </div>
     );
@@ -314,9 +362,25 @@ class NumberInput extends React.Component {
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
-        <div className="form-group">
-          <ComponentLabel {...this.props} />
-          <input {...props} />
+        <div
+          className={`form-group flex ${
+            this.props.data.canDisplayInline ? "items-center gap-2" : "flex-col"
+          }`}
+        >
+          <div
+            className={
+              this.props.data.isLabelDisplaySecond ? "form-builder-order-2" : ""
+            }
+          >
+            <ComponentLabel {...this.props} />
+          </div>
+          <div
+            className={`w-full ${
+              this.props.data.isLabelDisplaySecond ? "form-builder-order-1" : ""
+            }`}
+          >
+            <input {...props} />
+          </div>
         </div>
       </div>
     );
@@ -443,18 +507,34 @@ class Dropdown extends React.Component {
     return (
       <div style={{ ...this.props.style }} className={baseClasses}>
         <ComponentHeader {...this.props} />
-        <div className="form-group">
-          <ComponentLabel {...this.props} />
-          <select {...props}>
-            {this.props.data.options.map((option) => {
-              const this_key = `preview_${option.key}`;
-              return (
-                <option value={option.value} key={this_key}>
-                  {option.text}
-                </option>
-              );
-            })}
-          </select>
+        <div
+          className={`form-group flex ${
+            this.props.data.canDisplayInline ? "items-center gap-2" : "flex-col"
+          }`}
+        >
+          <div
+            className={
+              this.props.data.isLabelDisplaySecond ? "form-builder-order-2" : ""
+            }
+          >
+            <ComponentLabel {...this.props} />
+          </div>
+          <div
+            className={`w-full ${
+              this.props.data.isLabelDisplaySecond ? "form-builder-order-1" : ""
+            }`}
+          >
+            <select {...props}>
+              {this.props.data.options.map((option) => {
+                const this_key = `preview_${option.key}`;
+                return (
+                  <option value={option.value} key={this_key}>
+                    {option.text}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
         </div>
       </div>
     );

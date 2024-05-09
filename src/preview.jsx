@@ -98,7 +98,12 @@ export default class Preview extends React.Component {
     const answer_data = {};
 
     data.forEach((item) => {
-      if (item && item?.readOnly && item?.variableKey && this.props.variables[item.variableKey]) {
+      if (
+        item &&
+        item?.readOnly &&
+        item?.variableKey &&
+        this.props.variables[item.variableKey]
+      ) {
         answer_data[item.field_name] = this.props.variables[item.variableKey];
       }
     });
@@ -196,26 +201,41 @@ export default class Preview extends React.Component {
 
   setAsChild(item, child, col, isBusy) {
     const { data } = this.state;
-    if (this.swapChildren(data, item, child, col)) {
-      return;
-    }
+    // if (this.swapChildren(data, item, child, col)) {
+    //   return;
+    // }
     if (isBusy) {
       return;
     }
+
     const oldParent = this.getDataById(child.parentId);
     const oldCol = child.col;
     // eslint-disable-next-line no-param-reassign
-    item.childItems[col] = child.id;
+    if (item.childItems[col] === null) {
+      item.childItems[col] = child.id;
+    } else if (Array.isArray(item.childItems[col])) {
+      item.childItems[col].push(child.id);
+    } else {
+      item.childItems[col] = [item.childItems[col], child.id];
+    }
     child.col = col;
     // eslint-disable-next-line no-param-reassign
     child.parentId = item.id;
     // eslint-disable-next-line no-param-reassign
     child.parentIndex = data.indexOf(item);
     if (oldParent) {
-      oldParent.childItems[oldCol] = null;
+      if (Array.isArray(oldParent.childItems[oldCol])) {
+        oldParent.childItems[oldCol] = oldParent.childItems[oldCol].filter(
+          (x) => x !== child.id
+        );
+      } else {
+        oldParent.childItems[oldCol] = null;
+      }
     }
     const list = data.filter((x) => x && x.parentId === item.id);
-    const toRemove = list.filter((x) => item.childItems.indexOf(x.id) === -1);
+    const allItemsInRow = item.childItems.flat();
+    const toRemove = list.filter((x) => allItemsInRow.indexOf(x.id) === -1);
+
     let newData = data;
     if (toRemove.length) {
       // console.log('toRemove', toRemove);
@@ -227,14 +247,20 @@ export default class Preview extends React.Component {
     store.dispatch("updateOrder", newData);
   }
 
-  removeChild(item, col) {
+  removeChild(item, col, itemId = null) {
     const { data } = this.state;
-    const oldId = item.childItems[col];
+    const oldId = itemId !== null ? itemId : item.childItems[col];
+
     const oldItem = this.getDataById(oldId);
     if (oldItem) {
       const newData = data.filter((x) => x !== oldItem);
       // eslint-disable-next-line no-param-reassign
-      item.childItems[col] = null;
+      if (Array.isArray(item.childItems[col])) {
+        item.childItems[col] = item.childItems[col].filter((x) => x !== itemId);
+      } else {
+        item.childItems[col] = null;
+      }
+
       // delete oldItem.parentId;
       this.seq = this.seq > 100000 ? 0 : this.seq + 1;
       store.dispatch("updateOrder", newData);
