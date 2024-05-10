@@ -70,17 +70,17 @@ class Toolbar extends React.Component {
       case "Dropdown":
         return [
           {
-            value: "place_holder_option_1",
+            value: "1",
             text: intl.formatMessage({ id: "place-holder-option-1" }),
             key: `dropdown_option_${ID.uuid()}`,
           },
           {
-            value: "place_holder_option_2",
+            value: "2",
             text: intl.formatMessage({ id: "place-holder-option-2" }),
             key: `dropdown_option_${ID.uuid()}`,
           },
           {
-            value: "place_holder_option_3",
+            value: "3",
             text: intl.formatMessage({ id: "place-holder-option-3" }),
             key: `dropdown_option_${ID.uuid()}`,
           },
@@ -106,17 +106,17 @@ class Toolbar extends React.Component {
       case "Checkboxes":
         return [
           {
-            value: "place_holder_option_1",
+            value: "1",
             text: intl.formatMessage({ id: "place-holder-option-1" }),
             key: `checkboxes_option_${ID.uuid()}`,
           },
           {
-            value: "place_holder_option_2",
+            value: "2",
             text: intl.formatMessage({ id: "place-holder-option-2" }),
             key: `checkboxes_option_${ID.uuid()}`,
           },
           {
-            value: "place_holder_option_3",
+            value: "3",
             text: intl.formatMessage({ id: "place-holder-option-3" }),
             key: `checkboxes_option_${ID.uuid()}`,
           },
@@ -124,17 +124,17 @@ class Toolbar extends React.Component {
       case "RadioButtons":
         return [
           {
-            value: "place_holder_option_1",
+            value: "1",
             text: intl.formatMessage({ id: "place-holder-option-1" }),
             key: `radiobuttons_option_${ID.uuid()}`,
           },
           {
-            value: "place_holder_option_2",
+            value: "2",
             text: intl.formatMessage({ id: "place-holder-option-2" }),
             key: `radiobuttons_option_${ID.uuid()}`,
           },
           {
-            value: "place_holder_option_3",
+            value: "3",
             text: intl.formatMessage({ id: "place-holder-option-3" }),
             key: `radiobuttons_option_${ID.uuid()}`,
           },
@@ -243,6 +243,7 @@ class Toolbar extends React.Component {
         key: "LikertScale",
         canHaveAnswer: true,
         canHaveOptionCorrect: false,
+        canEditOptionValues: false,
         name: intl.formatMessage({ id: "likert-scale" }),
         icon: "fas fa-bezier-curve",
         label: intl.formatMessage({ id: "place-holder-label" }),
@@ -533,6 +534,7 @@ class Toolbar extends React.Component {
       elementOptions.inline = item.inline;
     }
     elementOptions.canHaveOptionCorrect = item.canHaveOptionCorrect !== false;
+    elementOptions.canEditOptionValues = item.canEditOptionValues !== false;
     elementOptions.canHaveOptionValue = item.canHaveOptionValue !== false;
     elementOptions.canPopulateFromApi = item.canPopulateFromApi !== false;
 
