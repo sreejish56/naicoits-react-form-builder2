@@ -455,6 +455,7 @@ export default class FormElementsEdit extends React.Component {
       canHaveDisplayHorizontal,
       canHaveOptionCorrect,
       canHaveOptionValue,
+      canEditOptionValues
     } = this.props.element;
     const canHaveImageSize =
       this.state.element.element === "Image" ||
@@ -1357,7 +1358,7 @@ export default class FormElementsEdit extends React.Component {
             preview={this.props.preview}
             element={this.props.element}
             key={this.props.element.options.length}
-            canEditOptionValues={this.state.element.element !== "LikertScale"}
+            canEditOptionValues={canEditOptionValues}
           />
         )}
       </div>

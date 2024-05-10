@@ -35,6 +35,7 @@ type BaseElement = {
   canHaveDisplayHorizontal: boolean;
   canHaveOptionCorrect: boolean;
   canHaveOptionValue: boolean;
+  canEditOptionValues: boolean;
   canHavePageBreakBefore: boolean;
   canPopulateFromApi: boolean;
   text: string;
