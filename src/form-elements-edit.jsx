@@ -95,11 +95,12 @@ export default class FormElementsEdit extends React.Component {
       data: this.props.data,
       dirty: false,
       isMounted: false,
+      searchMedia: "",
     };
   }
 
   componentDidMount() {
-    this.setState({ isMounted: true });
+    this.setState({ isMounted: true, searchMedia: "" });
   }
 
   toggleRequired() {
@@ -235,7 +236,7 @@ export default class FormElementsEdit extends React.Component {
             className="media-tile media-tile-image"
             style={{ backgroundImage: `url('${file?.url}')` }}
           >
-            <div className="media-file-name">
+            <div className="media-file-name" title={file?.fileName}>
               <span>{file?.fileName}</span>
             </div>
           </div>
@@ -289,7 +290,7 @@ export default class FormElementsEdit extends React.Component {
                 </clipPath>
               </defs>
             </svg>
-            <div className="media-file-name">
+            <div className="media-file-name" title={file?.fileName}>
               <span>{file?.fileName}</span>
             </div>
           </div>
@@ -344,7 +345,7 @@ export default class FormElementsEdit extends React.Component {
               </defs>
             </svg>
 
-            <div className="media-file-name">
+            <div className="media-file-name" title={file?.fileName}>
               <span>{file?.fileName}</span>
             </div>
           </div>
@@ -455,7 +456,7 @@ export default class FormElementsEdit extends React.Component {
       canHaveDisplayHorizontal,
       canHaveOptionCorrect,
       canHaveOptionValue,
-      canEditOptionValues
+      canEditOptionValues,
     } = this.props.element;
     const canHaveImageSize =
       this.state.element.element === "Image" ||
@@ -943,19 +944,37 @@ export default class FormElementsEdit extends React.Component {
                 <div className="mt-5">
                   <div className="mt-4 text-sm leading-6 text-gray-600">
                     <div className="media-tile-wrapper">
-                      {mediaSource.map((file) => (
-                        <div
-                          key={file?.id}
-                          className={
-                            file?.url === this.state.element.src
-                              ? "active-tile"
-                              : ""
-                          }
-                          onClick={this.selectFromMediaFile.bind(this, file)}
-                        >
-                          {this.MediaBrowserTile(file)}
-                        </div>
-                      ))}
+                      <input
+                        name="searchMedia"
+                        className="form-control mb-2"
+                        placeholder="Search media"
+                        onChange={(e) => {
+                          this.setState({ searchMedia: e.target.value });
+                        }}
+                        value={this.state.searchMedia}
+                      />
+                      {mediaSource
+                        .filter((file) => {
+                          return !!(
+                            this.state.searchMedia === "" ||
+                            file?.fileName
+                              ?.toLowerCase()
+                              ?.includes(this.state?.searchMedia?.toLowerCase())
+                          );
+                        })
+                        .map((file) => (
+                          <div
+                            key={file?.id}
+                            className={
+                              file?.url === this.state.element.src
+                                ? "active-tile"
+                                : ""
+                            }
+                            onClick={this.selectFromMediaFile.bind(this, file)}
+                          >
+                            {this.MediaBrowserTile(file)}
+                          </div>
+                        ))}
                     </div>
                   </div>
                 </div>
