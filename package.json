@@ -1,6 +1,6 @@
 {
   "name": "@naicoits/react-form-builder2",
-  "version": "0.2.19",
+  "version": "0.2.20",
   "description": "A complete form builder for react.",
   "main": "lib/index.js",
   "types": "types/index.d.ts",
