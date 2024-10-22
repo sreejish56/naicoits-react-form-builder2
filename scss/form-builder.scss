@@ -8,6 +8,9 @@
 }
 
 .react-form-builder-form {
+  .react-form-builder-question-number {
+    margin-right: 0.25rem;
+  }
   .rfb-item {
     label {
       span {
@@ -224,7 +227,7 @@
       }
       .dynamic-option-list {
         margin-bottom: 15px;
-        input[type=text]:read-only {
+        input[type="text"]:read-only {
           background: #ececec;
           text-align: center;
         }

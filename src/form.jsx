@@ -450,8 +450,12 @@ class ReactForm extends React.Component {
 
     const items = data_items
       .filter((x) => !x.parentId)
-      .map((item) => {
+      .map((item, index) => {
         if (!item) return null;
+        item.qIndex = index + 1;
+        item.isShowQuestionNumber = this.props.isShowQuestionNumber;
+        item.isViewOnly = this.props.isViewOnly;
+
         switch (item.element) {
           case "TextInput":
           case "EmailInput":
