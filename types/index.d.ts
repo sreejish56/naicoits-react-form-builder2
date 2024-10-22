@@ -39,6 +39,9 @@ type BaseElement = {
   canHavePageBreakBefore: boolean;
   canPopulateFromApi: boolean;
   text: string;
+  qIndex?: number;
+  isShowQuestionNumber?: boolean;
+  isViewOnly?: boolean;
 };
 export type StaticElement = {
   bold: boolean;
