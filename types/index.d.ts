@@ -39,6 +39,9 @@ type BaseElement = {
   canHavePageBreakBefore: boolean;
   canPopulateFromApi: boolean;
   text: string;
+  qIndex?: number;
+  isShowQuestionNumber?: boolean;
+  isViewOnly?: boolean;
 };
 export type StaticElement = {
   bold: boolean;
@@ -175,6 +178,8 @@ export interface FormGeneratorProps {
   // eslint-disable-next-line no-undef
   variables?: Record<any, any>;
   submitButton?: JSX.Element;
+  isShowQuestionNumber?: boolean;
+  isViewOnly?: boolean;
 }
 
 export class ReactFormGenerator extends React.Component<FormGeneratorProps> {}
