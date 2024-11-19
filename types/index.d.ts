@@ -150,6 +150,7 @@ export interface FormBuilderProps {
   renderEditForm?: (props: BaseElement) => React.ReactNode;
   imageMediaSource?: any[];
   videoMediaSource?: any[];
+  isNeedAdditionalContext?: boolean;
 }
 
 export class ReactFormBuilder extends React.Component<FormBuilderProps> {}

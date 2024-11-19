@@ -373,6 +373,7 @@ export default class Preview extends React.Component {
       updateElement: handleUpdateElement,
       imageMediaSource: this.props?.imageMediaSource ?? [],
       videoMediaSource: this.props?.videoMediaSource ?? [],
+      isNeedAdditionalContext: this.props?.isNeedAdditionalContext ?? false,
     };
 
     return this.props.renderEditForm(formElementEditProps);

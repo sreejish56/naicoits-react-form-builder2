@@ -223,6 +223,7 @@ const App = () => (
     videoMediaSource={sampleMediaSource.filter(
       (row) => !row.contentType.includes("image")
     )}
+    isNeedAdditionalContext={true}
   />
 );
 
