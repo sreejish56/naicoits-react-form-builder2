@@ -1178,7 +1178,7 @@ export default class FormElementsEdit extends React.Component {
 
         {isNeedAdditionalContext && (
           <>
-            <hr className="my-3.5 hr-line-gray" />
+            <hr className="hr-line-gray" />
             <h5 className="text-base font-semibold !mb-0">
               <IntlMessages id="additional-guidance-for-ai" />
             </h5>
@@ -1240,7 +1240,7 @@ export default class FormElementsEdit extends React.Component {
 
         {isBothPDFAndPrintOptions && (
           <>
-            <hr className="my-3.5 hr-line-gray" />
+            <hr className="hr-line-gray" />
             <h5 className="text-base font-semibold !mb-0">
               <IntlMessages id="pdf-or-print-options" />
             </h5>
@@ -1316,7 +1316,7 @@ export default class FormElementsEdit extends React.Component {
             </div>
           )}
         </div>
-        {isBothPDFAndPrintOptions && <hr className="mt-3.5 hr-line-gray" />}
+        {isBothPDFAndPrintOptions && <hr className="hr-line-gray" />}
 
         {this.props.element.hasOwnProperty("step") && (
           <div className="form-group">
