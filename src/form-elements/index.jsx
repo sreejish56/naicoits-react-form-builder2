@@ -223,7 +223,9 @@ class TextInput extends React.Component {
             }`}
           >
             {isViewOnly ? (
-              <ReactMarkdown>{props?.value}</ReactMarkdown>
+              <ReactMarkdown>
+                {props?.defaultValue ?? props?.value}
+              </ReactMarkdown>
             ) : (
               <input {...props} />
             )}
@@ -281,7 +283,9 @@ class EmailInput extends React.Component {
             }`}
           >
             {isViewOnly ? (
-              <ReactMarkdown>{props?.value}</ReactMarkdown>
+              <ReactMarkdown>
+                {props?.defaultValue ?? props?.value}
+              </ReactMarkdown>
             ) : (
               <input {...props} />
             )}
@@ -339,7 +343,9 @@ class PhoneNumber extends React.Component {
             }`}
           >
             {isViewOnly ? (
-              <ReactMarkdown>{props?.value}</ReactMarkdown>
+              <ReactMarkdown>
+                {props?.defaultValue ?? props?.value}
+              </ReactMarkdown>
             ) : (
               <input {...props} />
             )}
@@ -398,7 +404,9 @@ class NumberInput extends React.Component {
             }`}
           >
             {isViewOnly ? (
-              <ReactMarkdown>{props?.value}</ReactMarkdown>
+              <ReactMarkdown>
+                {props?.defaultValue ?? props?.value}
+              </ReactMarkdown>
             ) : (
               <input {...props} />
             )}
@@ -441,7 +449,7 @@ class TextArea extends React.Component {
         <div className="form-group">
           <ComponentLabel {...this.props} />
           {isViewOnly ? (
-            <ReactMarkdown>{props?.value}</ReactMarkdown>
+            <ReactMarkdown>{props?.defaultValue ?? props?.value}</ReactMarkdown>
           ) : (
             <textarea {...props} />
           )}
