@@ -444,6 +444,11 @@ export default class FormElementsEdit extends React.Component {
     )
       ? this.state.element.pageBreakBefore
       : false;
+    const this_hideLabelInPdf = this.state.element.hasOwnProperty(
+      "hideLabelInPdf"
+    )
+      ? this.state.element.hideLabelInPdf
+      : false;
     const this_checked_alternate_form = this.state.element.hasOwnProperty(
       "alternateForm"
     )
@@ -481,6 +486,18 @@ export default class FormElementsEdit extends React.Component {
       this.state.element.element === "Video"
         ? this.props?.videoMediaSource
         : this.props?.imageMediaSource;
+
+    const isTextInput =
+      this.state.element.element === "TextInput" ||
+      this.state.element.element === "EmailInput" ||
+      this.state.element.element === "PhoneNumber" ||
+      this.state.element.element === "NumberInput" ||
+      this.state.element.element === "TextArea";
+    const isNeedAdditionalContext =
+      (this.props?.isNeedAdditionalContext ?? false) && isTextInput;
+
+    const isBothPDFAndPrintOptions =
+      isNeedAdditionalContext && canHavePageBreakBefore;
 
     const sourceTypeOptions = ["Link"];
     if (showUploadOption) {
@@ -622,29 +639,32 @@ export default class FormElementsEdit extends React.Component {
             <br />
             {this.props.element.hasOwnProperty("defaultValue") &&
               this.props.element.element === "ColorPicker" && (
-                <div>
-                  <label
-                    className="control-label"
-                    htmlFor="is-this_colorPickerDefaultValue"
-                  >
-                    <IntlMessages id="colorPickerDefaultValue" />
-                  </label>
-                  <div className="default-color-picker-wrapper">
-                    <input
-                      id="is-this_colorPickerDefaultValue"
-                      type="color"
-                      className="default-color-picker-value"
-                      value={this_colorPickerDefaultValue}
-                      onChange={this.editElementProp.bind(
-                        this,
-                        "defaultValue",
-                        "value"
-                      )}
-                    />
+                <>
+                  <div>
+                    <label
+                      className="control-label"
+                      htmlFor="is-this_colorPickerDefaultValue"
+                    >
+                      <IntlMessages id="colorPickerDefaultValue" />
+                    </label>
+                    <div className="default-color-picker-wrapper">
+                      <input
+                        id="is-this_colorPickerDefaultValue"
+                        type="color"
+                        className="default-color-picker-value"
+                        value={this_colorPickerDefaultValue}
+                        onChange={this.editElementProp.bind(
+                          this,
+                          "defaultValue",
+                          "value"
+                        )}
+                      />
+                    </div>
                   </div>
-                </div>
+                  <br />
+                </>
               )}
-            <br />
+
             <div className="custom-control custom-checkbox">
               <input
                 id="is-required"
@@ -1128,34 +1148,6 @@ export default class FormElementsEdit extends React.Component {
           </div>
         )}
 
-        {canHavePageBreakBefore && (
-          <div className="form-group">
-            <label className="control-label">
-              <IntlMessages id="print-options" />
-            </label>
-            <div className="custom-control custom-checkbox">
-              <input
-                id="page-break-before-element"
-                className="custom-control-input"
-                type="checkbox"
-                checked={this_checked_page_break}
-                value={true}
-                onChange={this.editElementProp.bind(
-                  this,
-                  "pageBreakBefore",
-                  "checked"
-                )}
-              />
-              <label
-                className="custom-control-label"
-                htmlFor="page-break-before-element"
-              >
-                <IntlMessages id="page-break-before-elements" />?
-              </label>
-            </div>
-          </div>
-        )}
-
         {canHaveAlternateForm && (
           <div className="form-group">
             <label className="control-label">
@@ -1183,6 +1175,149 @@ export default class FormElementsEdit extends React.Component {
             </div>
           </div>
         )}
+
+        {isNeedAdditionalContext && (
+          <>
+            <hr className="hr-line-gray" />
+            <h5 className="text-base font-semibold !mb-0">
+              <IntlMessages id="additional-guidance-for-ai" />
+            </h5>
+            <div className="form-group">
+              <label className="control-label !pt-3">
+                <IntlMessages id="expected-output-format" />
+              </label>
+              <select
+                id="expected-output-format"
+                className="form-control"
+                defaultValue={
+                  this.state.element?.expectedOutputFormat ??
+                  "Detailed Description"
+                }
+                onBlur={this.updateElement.bind(this)}
+                onChange={this.editElementProp.bind(
+                  this,
+                  "expectedOutputFormat",
+                  "value"
+                )}
+              >
+                {[
+                  "Title/Headings",
+                  "Short Description",
+                  "Detailed Description",
+                  "Bullet Points",
+                  "Numbered Lists",
+                  "Tables",
+                  "Quotes or Callouts",
+                ].map((row) => {
+                  return (
+                    <option value={row} key={row}>
+                      {row}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+            <div className="form-group">
+              <label className="control-label">
+                <IntlMessages id="additional-information-to-ai" />
+              </label>
+              <TextAreaAutosize
+                type="text"
+                className="form-control py-3"
+                id="additional-information-to-ai"
+                minRows={5}
+                defaultValue={this.props.element.additionalInfoToAi}
+                onBlur={this.updateElement.bind(this)}
+                onChange={this.editElementProp.bind(
+                  this,
+                  "additionalInfoToAi",
+                  "value"
+                )}
+              />
+            </div>
+          </>
+        )}
+
+        {isBothPDFAndPrintOptions && (
+          <>
+            <hr className="hr-line-gray" />
+            <h5 className="text-base font-semibold !mb-0">
+              <IntlMessages id="pdf-or-print-options" />
+            </h5>
+          </>
+        )}
+
+        <div className="flex flex-wrap">
+          {isNeedAdditionalContext && (
+            <div className="md:w-1/2 w-full">
+              <div className="form-group">
+                <label
+                  className={
+                    "control-label " + (isBothPDFAndPrintOptions ? "!pt-3" : "")
+                  }
+                >
+                  <IntlMessages id="pdf-options" />
+                </label>
+                <div className="custom-control custom-checkbox">
+                  <input
+                    id="hide-label-in-pdf"
+                    className="custom-control-input"
+                    type="checkbox"
+                    checked={this_hideLabelInPdf}
+                    value={true}
+                    onChange={this.editElementProp.bind(
+                      this,
+                      "hideLabelInPdf",
+                      "checked"
+                    )}
+                  />
+                  <label
+                    className="custom-control-label"
+                    htmlFor="hide-label-in-pdf"
+                  >
+                    <IntlMessages id="hide-label-in-pdf" />?
+                  </label>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {canHavePageBreakBefore && (
+            <div className="md:w-1/2 w-full">
+              <div className="form-group">
+                <label
+                  className={
+                    "control-label " + (isBothPDFAndPrintOptions ? "!pt-3" : "")
+                  }
+                >
+                  <IntlMessages id="print-options" />
+                </label>
+                <div className="custom-control custom-checkbox">
+                  <input
+                    id="page-break-before-element"
+                    className="custom-control-input"
+                    type="checkbox"
+                    checked={this_checked_page_break}
+                    value={true}
+                    onChange={this.editElementProp.bind(
+                      this,
+                      "pageBreakBefore",
+                      "checked"
+                    )}
+                  />
+                  <label
+                    className="custom-control-label"
+                    htmlFor="page-break-before-element"
+                  >
+                    <IntlMessages id="page-break-before-elements" />?
+                  </label>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+        {isBothPDFAndPrintOptions && <hr className="hr-line-gray" />}
+
         {this.props.element.hasOwnProperty("step") && (
           <div className="form-group">
             <div className="form-group-range">
@@ -1314,8 +1449,9 @@ export default class FormElementsEdit extends React.Component {
             </label>
             <TextAreaAutosize
               type="text"
-              className="form-control"
+              className="form-control py-3"
               id="questionDescription"
+              minRows={3}
               defaultValue={this.props.element.description}
               onBlur={this.updateElement.bind(this)}
               onChange={this.editElementProp.bind(this, "description", "value")}

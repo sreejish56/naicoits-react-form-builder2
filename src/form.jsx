@@ -450,8 +450,9 @@ class ReactForm extends React.Component {
 
     const items = data_items
       .filter((x) => !x.parentId)
-      .map((item, index) => {
-        if (!item) return null;
+      .map((row, index) => {
+        if (!row) return null;
+        const item = { ...row };
         item.qIndex = index + 1;
         item.isShowQuestionNumber = this.props.isShowQuestionNumber;
         item.isViewOnly = this.props.isViewOnly;

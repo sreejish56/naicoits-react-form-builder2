@@ -39,6 +39,9 @@ type BaseElement = {
   canHavePageBreakBefore: boolean;
   canPopulateFromApi: boolean;
   text: string;
+  qIndex?: number;
+  isShowQuestionNumber?: boolean;
+  isViewOnly?: boolean;
 };
 export type StaticElement = {
   bold: boolean;
@@ -147,6 +150,7 @@ export interface FormBuilderProps {
   renderEditForm?: (props: BaseElement) => React.ReactNode;
   imageMediaSource?: any[];
   videoMediaSource?: any[];
+  isNeedAdditionalContext?: boolean;
 }
 
 export class ReactFormBuilder extends React.Component<FormBuilderProps> {}

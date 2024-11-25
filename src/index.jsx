@@ -115,6 +115,7 @@ class ReactFormBuilder extends React.Component {
                   saveAlways={this.props.saveAlways}
                   imageMediaSource={this.props?.imageMediaSource ?? []}
                   videoMediaSource={this.props?.videoMediaSource ?? []}
+                  isNeedAdditionalContext={this.props?.isNeedAdditionalContext ?? false}
                 />
                 <Toolbar
                   {...toolbarProps}

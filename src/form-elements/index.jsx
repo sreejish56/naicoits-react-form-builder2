@@ -5,6 +5,7 @@ import React from "react";
 import Select from "react-select";
 import SignaturePad from "react-signature-canvas";
 import ReactBootstrapSlider from "react-bootstrap-slider";
+import ReactMarkdown from "react-markdown";
 
 import StarRating from "./star-rating";
 import DatePicker from "./date-picker";
@@ -185,6 +186,8 @@ class TextInput extends React.Component {
     props.type = "text";
     props.className = "form-control";
     props.name = this.props.data.field_name;
+    const isViewOnly = this.props.data.isViewOnly;
+
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
       props.ref = this.inputField;
@@ -219,7 +222,13 @@ class TextInput extends React.Component {
               this.props.data.isLabelDisplaySecond ? "form-builder-order-1" : ""
             }`}
           >
-            <input {...props} />
+            {isViewOnly ? (
+              <ReactMarkdown>
+                {props?.defaultValue ?? props?.value}
+              </ReactMarkdown>
+            ) : (
+              <input {...props} />
+            )}
           </div>
         </div>
       </div>
@@ -238,6 +247,7 @@ class EmailInput extends React.Component {
     props.type = "email";
     props.className = "form-control";
     props.name = this.props.data.field_name;
+    const isViewOnly = this.props.data.isViewOnly;
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
       props.ref = this.inputField;
@@ -272,7 +282,13 @@ class EmailInput extends React.Component {
               this.props.data.isLabelDisplaySecond ? "form-builder-order-1" : ""
             }`}
           >
-            <input {...props} />
+            {isViewOnly ? (
+              <ReactMarkdown>
+                {props?.defaultValue ?? props?.value}
+              </ReactMarkdown>
+            ) : (
+              <input {...props} />
+            )}
           </div>
         </div>
       </div>
@@ -291,6 +307,7 @@ class PhoneNumber extends React.Component {
     props.type = "tel";
     props.className = "form-control";
     props.name = this.props.data.field_name;
+    const isViewOnly = this.props.data.isViewOnly;
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
       props.ref = this.inputField;
@@ -325,7 +342,13 @@ class PhoneNumber extends React.Component {
               this.props.data.isLabelDisplaySecond ? "form-builder-order-1" : ""
             }`}
           >
-            <input {...props} />
+            {isViewOnly ? (
+              <ReactMarkdown>
+                {props?.defaultValue ?? props?.value}
+              </ReactMarkdown>
+            ) : (
+              <input {...props} />
+            )}
           </div>
         </div>
       </div>
@@ -344,6 +367,7 @@ class NumberInput extends React.Component {
     props.type = "number";
     props.className = "form-control";
     props.name = this.props.data.field_name;
+    const isViewOnly = this.props.data.isViewOnly;
 
     if (this.props.mutable) {
       props.defaultValue = this.props.defaultValue;
@@ -379,7 +403,13 @@ class NumberInput extends React.Component {
               this.props.data.isLabelDisplaySecond ? "form-builder-order-1" : ""
             }`}
           >
-            <input {...props} />
+            {isViewOnly ? (
+              <ReactMarkdown>
+                {props?.defaultValue ?? props?.value}
+              </ReactMarkdown>
+            ) : (
+              <input {...props} />
+            )}
           </div>
         </div>
       </div>
@@ -397,6 +427,7 @@ class TextArea extends React.Component {
     const props = {};
     props.className = "form-control";
     props.name = this.props.data.field_name;
+    const isViewOnly = this.props.data.isViewOnly;
 
     if (this.props.read_only) {
       props.disabled = "disabled";
@@ -417,7 +448,11 @@ class TextArea extends React.Component {
         <ComponentHeader {...this.props} />
         <div className="form-group">
           <ComponentLabel {...this.props} />
-          <textarea {...props} />
+          {isViewOnly ? (
+            <ReactMarkdown>{props?.defaultValue ?? props?.value}</ReactMarkdown>
+          ) : (
+            <textarea {...props} />
+          )}
         </div>
       </div>
     );

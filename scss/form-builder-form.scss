@@ -144,8 +144,14 @@ input[type="date"] {
   order: 2;
 }
 
-.show-dot-border .SortableItem.rfb-item{
+.show-dot-border .SortableItem.rfb-item {
   border: 1px dashed gray;
   margin: 0.25rem;
   width: calc(100% - 0.5rem) !important;
+}
+
+.hr-line-gray {
+  border-color: #cfcfcf;
+  margin-top: 0.875rem;
+  margin-bottom: 0.875rem;
 }

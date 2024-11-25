@@ -502,11 +502,30 @@ class Toolbar extends React.Component {
     if (item.canReadOnly) {
       elementOptions.readOnly = false;
     }
-    if (item.canDisplayInline) {
+    if (item?.canDisplayInline) {
       elementOptions.canDisplayInline = false;
     }
-    if (item.isLabelDisplaySecond) {
+
+    if (item?.isLabelDisplaySecond) {
       elementOptions.isLabelDisplaySecond = false;
+    }
+
+    if (typeof item?.expectedOutputFormat !== "undefined") {
+      elementOptions.expectedOutputFormat = item.expectedOutputFormat;
+    } else {
+      elementOptions.expectedOutputFormat = "Detailed Description";
+    }
+
+    if (typeof item?.additionalInfoToAi !== "undefined") {
+      elementOptions.additionalInfoToAi = item.additionalInfoToAi;
+    } else {
+      elementOptions.additionalInfoToAi = "";
+    }
+
+    if (typeof item?.hideLabelInPdf !== "undefined") {
+      elementOptions.hideLabelInPdf = item.hideLabelInPdf;
+    } else {
+      elementOptions.hideLabelInPdf = false;
     }
 
     if (item.canDefaultToday) {
