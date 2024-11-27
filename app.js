@@ -1,9 +1,10 @@
 import React from "react";
-import ReactDOM from "react-dom";
+// import ReactDOM from "react-dom";
 import DemoBar from "./demobar";
 // eslint-disable-next-line no-unused-vars
 import FormBuilder, { Registry } from "./src/index";
 import * as variables from "./variables";
+import { createRoot } from "react-dom/client";
 
 // Add our stylesheets for the demo.
 require("./scss/application.scss");
@@ -227,9 +228,17 @@ const App = () => (
   />
 );
 
-ReactDOM.render(<App />, document.getElementById("form-builder"));
+const mainContainer = document.getElementById("form-builder");
+const root = createRoot(mainContainer); // createRoot(mainContainer!) if you use TypeScript
+root.render(<App />);
 
-ReactDOM.render(
+const demoBarContainer = document.getElementById("demo-bar");
+const demoBarRoot = createRoot(demoBarContainer); // createRoot(demoBarContainer!) if you use TypeScript
+demoBarRoot.render(<DemoBar variables={variables} />);
+
+// ReactDOM.render(<App />, document.getElementById("form-builder"));
+
+/* ReactDOM.render(
   <DemoBar variables={variables} />,
   document.getElementById("demo-bar")
-);
+); */

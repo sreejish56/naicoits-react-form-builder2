@@ -10,7 +10,7 @@ export default class DynamicOptionList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      element: this.props.element,
+      element: { ...this.props.element },
       data: this.props.data,
       dirty: false,
     };
@@ -21,7 +21,7 @@ export default class DynamicOptionList extends React.Component {
   }
 
   editOption(option_index, e) {
-    const this_element = this.state.element;
+    const this_element = { ...this.state.element };
     const val =
       this_element.options[option_index].value !==
       this._setValue(this_element.options[option_index].text)
@@ -37,7 +37,7 @@ export default class DynamicOptionList extends React.Component {
   }
 
   editValue(option_index, e) {
-    const this_element = this.state.element;
+    const this_element = { ...this.state.element };
     const val =
       e.target.value === ""
         ? this._setValue(this_element.options[option_index].text)
@@ -51,7 +51,7 @@ export default class DynamicOptionList extends React.Component {
 
   // eslint-disable-next-line no-unused-vars
   editOptionCorrect(option_index, e) {
-    const this_element = this.state.element;
+    const this_element = { ...this.state.element };
     if (this_element.options[option_index].hasOwnProperty("correct")) {
       delete this_element.options[option_index].correct;
     } else {
@@ -62,7 +62,7 @@ export default class DynamicOptionList extends React.Component {
   }
 
   updateOption() {
-    const this_element = this.state.element;
+    const this_element = { ...this.state.element };
     // to prevent ajax calls with no change
     if (this.state.dirty) {
       this.props.updateElement.call(this.props.preview, this_element);
@@ -71,7 +71,7 @@ export default class DynamicOptionList extends React.Component {
   }
 
   addOption(index) {
-    const this_element = this.state.element;
+    const this_element = { ...this.state.element };
     this_element.options.splice(index + 1, 0, {
       value: "",
       text: "",
@@ -87,7 +87,7 @@ export default class DynamicOptionList extends React.Component {
   }
 
   removeOption(index) {
-    const this_element = this.state.element;
+    const this_element = { ...this.state.element };
     this_element.options.splice(index, 1);
     if (!this.props.canEditOptionValues) {
       this_element.options = this_element.options.map((option, index) => {
@@ -167,6 +167,7 @@ export default class DynamicOptionList extends React.Component {
                         <input
                           className="form-control"
                           type="checkbox"
+                          name={`correct_${index}`}
                           value="1"
                           onChange={this.editOptionCorrect.bind(this, index)}
                           checked={option.hasOwnProperty("correct")}
@@ -176,6 +177,7 @@ export default class DynamicOptionList extends React.Component {
                   <div className="sm:w-3/12 px-3">
                     <div className="dynamic-options-actions-buttons">
                       <button
+                        type="button"
                         onClick={this.addOption.bind(this, index)}
                         className="button button-primary"
                       >
@@ -183,6 +185,7 @@ export default class DynamicOptionList extends React.Component {
                       </button>
                       {index > 0 && (
                         <button
+                          type="button"
                           onClick={this.removeOption.bind(this, index)}
                           className="button button-secondary"
                         >
