@@ -10,10 +10,15 @@ export default class DynamicOptionList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      element: { ...this.props.element },
+      element: this.props.element,
       data: this.props.data,
       dirty: false,
+      isMounted: false,
     };
+  }
+
+  componentDidMount() {
+    this.setState({ isMounted: true });
   }
 
   _setValue(text) {
@@ -21,7 +26,7 @@ export default class DynamicOptionList extends React.Component {
   }
 
   editOption(option_index, e) {
-    const this_element = { ...this.state.element };
+    const this_element = this.state.element;
     const val =
       this_element.options[option_index].value !==
       this._setValue(this_element.options[option_index].text)
@@ -30,6 +35,7 @@ export default class DynamicOptionList extends React.Component {
 
     this_element.options[option_index].text = e.target.value;
     this_element.options[option_index].value = val;
+    this_element.dirty = true;
     this.setState({
       element: this_element,
       dirty: true,
@@ -37,12 +43,13 @@ export default class DynamicOptionList extends React.Component {
   }
 
   editValue(option_index, e) {
-    const this_element = { ...this.state.element };
+    const this_element = this.state.element;
     const val =
       e.target.value === ""
         ? this._setValue(this_element.options[option_index].text)
         : e.target.value;
     this_element.options[option_index].value = val;
+    this_element.dirty = true;
     this.setState({
       element: this_element,
       dirty: true,
@@ -51,7 +58,7 @@ export default class DynamicOptionList extends React.Component {
 
   // eslint-disable-next-line no-unused-vars
   editOptionCorrect(option_index, e) {
-    const this_element = { ...this.state.element };
+    const this_element = this.state.element;
     if (this_element.options[option_index].hasOwnProperty("correct")) {
       delete this_element.options[option_index].correct;
     } else {
@@ -62,7 +69,7 @@ export default class DynamicOptionList extends React.Component {
   }
 
   updateOption() {
-    const this_element = { ...this.state.element };
+    const this_element = this.state.element;
     // to prevent ajax calls with no change
     if (this.state.dirty) {
       this.props.updateElement.call(this.props.preview, this_element);
@@ -71,8 +78,7 @@ export default class DynamicOptionList extends React.Component {
   }
 
   addOption(index) {
-    const this_element = { ...this.state.element };
-    this_element.options = [...this_element.options];
+    const this_element = this.state.element;
     this_element.options.splice(index + 1, 0, {
       value: "",
       text: "",
@@ -88,8 +94,7 @@ export default class DynamicOptionList extends React.Component {
   }
 
   removeOption(index) {
-    const this_element = { ...this.state.element };
-    this_element.options = [...this_element.options];
+    const this_element = this.state.element;
     this_element.options.splice(index, 1);
     if (!this.props.canEditOptionValues) {
       this_element.options = this_element.options.map((option, index) => {
@@ -101,9 +106,12 @@ export default class DynamicOptionList extends React.Component {
   }
 
   render() {
-    if (this.state.dirty) {
-      this.state.element.dirty = true;
+    if (!this.state.isMounted) {
+      return <div />;
     }
+    /* if (this.state.dirty) {
+      this.state.element.dirty = true;
+    } */
     return (
       <div className="dynamic-option-list">
         <ul>
