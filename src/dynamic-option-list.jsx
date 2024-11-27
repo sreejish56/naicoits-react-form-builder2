@@ -72,6 +72,7 @@ export default class DynamicOptionList extends React.Component {
 
   addOption(index) {
     const this_element = { ...this.state.element };
+    this_element.options = [...this_element.options];
     this_element.options.splice(index + 1, 0, {
       value: "",
       text: "",
@@ -88,6 +89,7 @@ export default class DynamicOptionList extends React.Component {
 
   removeOption(index) {
     const this_element = { ...this.state.element };
+    this_element.options = [...this_element.options];
     this_element.options.splice(index, 1);
     if (!this.props.canEditOptionValues) {
       this_element.options = this_element.options.map((option, index) => {
