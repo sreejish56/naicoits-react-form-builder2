@@ -13,7 +13,12 @@ export default class DynamicOptionList extends React.Component {
       element: this.props.element,
       data: this.props.data,
       dirty: false,
+      isMounted: false,
     };
+  }
+
+  componentDidMount() {
+    this.setState({ isMounted: true });
   }
 
   _setValue(text) {
@@ -99,6 +104,9 @@ export default class DynamicOptionList extends React.Component {
   }
 
   render() {
+    if (!this.state.isMounted) {
+      return <div />;
+    }
     if (this.state.dirty) {
       this.state.element.dirty = true;
     }
@@ -176,6 +184,7 @@ export default class DynamicOptionList extends React.Component {
                   <div className="sm:w-3/12 px-3">
                     <div className="dynamic-options-actions-buttons">
                       <button
+                        type="button"
                         onClick={this.addOption.bind(this, index)}
                         className="button button-primary"
                       >
@@ -183,6 +192,7 @@ export default class DynamicOptionList extends React.Component {
                       </button>
                       {index > 0 && (
                         <button
+                          type="button"
                           onClick={this.removeOption.bind(this, index)}
                           className="button button-secondary"
                         >
